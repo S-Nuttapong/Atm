@@ -1,6 +1,6 @@
-import { Grid } from '@chakra-ui/react'
+import { useUserInformation } from '@entities/user'
 import { Transaction } from '@shared/types'
-import { Button } from '@shared/ui'
+import { Button, Grid } from '@shared/ui'
 import { useTransactionNavigation } from './transaction-navigation'
 
 //2 by 2 on all view, except mobile: they will be wrap into single column instead
@@ -15,6 +15,10 @@ const transactions: Transaction[] = [
 
 export const TransactionsMenu = () => {
   const { navigate } = useTransactionNavigation()
+  const userInfo = useUserInformation()
+
+  console.debug({ userInfo })
+
   return (
     <Grid
       w="full"

@@ -1,8 +1,15 @@
-
+import { userConfig } from '@entities/user';
 import { api } from '@shared/apis';
 import { separateQueryOperationAndResult, useQuery } from '@shared/react-query';
-import { PinVerificationResponse, User, UserVerifyPinConfigs } from '@shared/types';
+import { PinVerificationResponse, User } from '@shared/types';
 import axios from 'axios';
+
+export type UserVerifyPinConfigs = {
+    onSuccess?: (data: User) => void
+    onError?: (err: unknown) => void
+    refetch?: boolean
+    enabled?: boolean
+}
 
 const mockUserInformation = {
     id: '1111',
@@ -33,16 +40,13 @@ export const getUserInformation = async (pin: string) => {
 
 export const useGetUserInformation = (pin: string, configs = {} as UserVerifyPinConfigs) => {
     const data = useQuery({
-        queryKey: ['user', pin],
+        queryKey: [userConfig.entry, pin],
         queryFn: () => getUserInformation(pin),
         retry: false,
         enabled: false,
-        onSuccess: data => {
-            configs?.onSuccess?.(data)
-        },
-        onError: (error) => {
-            configs?.onError?.(error)
-        },
+        staleTime: 60000, // Set the staleTime to 1 minute (adjust as needed),
+        ...configs,
     })
     return separateQueryOperationAndResult(data)
 }
+

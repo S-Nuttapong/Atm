@@ -1,6 +1,6 @@
 import { useQuery as tanstackUseQuery } from "@tanstack/react-query";
 
-export { QueryClient, QueryClientProvider, useMutation } from "@tanstack/react-query";
+export { QueryClient, QueryClientProvider, useMutation, useQueryClient } from "@tanstack/react-query";
 export { separateQueryOperationAndResult } from "./separateQueryOperationAndResult";
 
 /**

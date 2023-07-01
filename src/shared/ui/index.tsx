@@ -7,6 +7,7 @@ export {
   FormControl,
   FormHelperText,
   FormLabel,
+  Grid,
   HStack,
   Input,
   PinInput,

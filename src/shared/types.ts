@@ -30,8 +30,3 @@ export type getUserInformation = (pin: string) => Promise<User>
 export interface PinVerificationResponse {
     currentBalance: number;
 }
-
-export type UserVerifyPinConfigs = {
-    onSuccess?: (data: User) => void
-    onError?: (err: unknown) => void
-}
