@@ -1,4 +1,4 @@
-import { contextFactory } from '@shared/lib/context'
+import { contextFactory } from '@shared/libs/context'
 import { ComponentWithChildren, Transaction } from '@shared/types'
 import { useState } from 'react'
 

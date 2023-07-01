@@ -14,5 +14,7 @@ export {
   PinInputProvider,
   Spinner,
   Stack,
+  ThemeProvider,
   Text as Txt,
+  theme,
 } from '@chakra-ui/react'
