@@ -1,4 +1,3 @@
-import { useUserInformation } from '@entities/user'
 import { Transaction } from '@shared/types'
 import { Button, Grid } from '@shared/ui'
 import { useTransactionNavigation } from './transaction-navigation'
@@ -15,9 +14,6 @@ const transactions: Transaction[] = [
 
 export const TransactionsMenu = () => {
   const { navigate } = useTransactionNavigation()
-  const userInfo = useUserInformation()
-
-  console.debug({ userInfo })
 
   return (
     <Grid
