@@ -1,24 +1,22 @@
 
 import { userConfig } from "@entities/user/userConfig";
-import { QueryClient, useQueryClient } from "@shared/react-query";
+import { QueryCache, useQueryClient } from "@shared/react-query";
 import { User } from "@shared/types";
 
 export const useUserInformation = (pin?: string) => {
-    const queryClient = useQueryClient();
-
-    if (pin) return queryClient.getQueryCache().find([userConfig.entry, pin])?.state?.data
-
-
-    return getLastLoginUser(queryClient);
+    const queryCache = useQueryClient().getQueryCache()
+    return pin ? findUserByPin(queryCache, pin) : getLastLoginUser(queryCache)
 };
 
-function getLastLoginUser(queryClient: QueryClient) {
-    const cacheEntries = queryClient.getQueryCache().getAll();
+function findUserByPin(queryCache: QueryCache, pin: string) {
+    return queryCache.find([userConfig.entry, pin])?.state?.data as User | undefined;
+}
 
-    // Filter cache entries by the query key
+function getLastLoginUser(queryCache: QueryCache) {
+    const cacheEntries = queryCache.getAll();
+
     const users = cacheEntries.filter((entry) => entry.queryKey[0] === userConfig.entry);
 
-    // Sort cache entries by the last update timestamp (dataUpdateCount)
     users.sort((a, b) => {
         const lastUpdatedA = a.state.dataUpdateCount ?? 0;
         const lastUpdatedB = b.state.dataUpdateCount ?? 0;
