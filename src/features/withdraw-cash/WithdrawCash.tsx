@@ -1,5 +1,7 @@
-import { useTransactionNavigation } from '@entities/transaction'
-import { MakeNewTransaction } from '@entities/transaction/MakeNewTransction'
+import {
+  MakeNewTransaction,
+  useTransactionNavigation,
+} from '@entities/transaction'
 import { useUserInformation } from '@entities/user'
 import { useWithdrawCash } from '@features/withdraw-cash/api/useWithdrawCash'
 import { getCurrencySymbol } from '@shared/libs/currency'

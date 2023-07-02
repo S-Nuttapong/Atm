@@ -1,4 +1,5 @@
 import {
+  TransactionNotAvailable,
   TransactionsMenu,
   useTransactionNavigation,
 } from '@entities/transaction'
@@ -8,7 +9,6 @@ import { Transaction } from '@shared/types'
 import { Box, Flex } from '@shared/ui'
 import { ComponentType } from 'react'
 import { AtmLayout } from './AtmLayout'
-import { TransactionNotAvailable } from './TransactionNotAvailable'
 
 type AtmTransactionUiMap = Record<Transaction, ComponentType>
 
@@ -36,7 +36,7 @@ function App() {
   const { transaction } = useTransactionNavigation()
   const AtmTransaction = AtmTransactionMap[transaction]
   return (
-    <Box w="100vw" h="100vh">
+    <Box w="100vw" h="100vh" bg="bg.primary">
       <Flex h="full" w="full" alignItems="center" justifyContent="center">
         <AtmLayout>
           <AtmTransaction />

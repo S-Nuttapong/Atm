@@ -11,7 +11,7 @@ export const AtmLayout: ComponentWithChildren = ({ children }) => (
     alignItems="center"
     justifyItems="center"
     border="solid"
-    borderWidth={5}
+    borderWidth={2}
     borderColor="neutral.100"
     borderRadius={5}
     px={14}
