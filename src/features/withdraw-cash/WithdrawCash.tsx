@@ -1,7 +1,11 @@
 import { useTransactionNavigation } from '@entities/transaction'
+import { useUserInformation } from '@entities/user'
+import { useWithdrawCash } from '@features/withdraw-cash/api/useWithdrawCash'
+import { getCurrencySymbol } from '@shared/libs/currency'
+import { User } from '@shared/types'
 import { Button, Flex, HStack, Spinner, Stack, Txt } from '@shared/ui'
 import { useState } from 'react'
-import CurrencyInput, { CurrencyInputProps } from 'react-currency-input-field'
+import CurrencyInput from 'react-currency-input-field'
 
 const WithdrawalSuccess = () => {
   const { goToMainMenu, exit } = useTransactionNavigation()
@@ -20,7 +24,7 @@ const WithdrawalSuccess = () => {
   )
 }
 
-const WithdrawalFail = () => {
+const WithdrawalFail = ({ errorMessage }: { errorMessage: string }) => {
   const { goToMainMenu, exit } = useTransactionNavigation()
   return (
     <Flex w="full" h="full" justifyContent="center" alignItems="center">
@@ -28,7 +32,7 @@ const WithdrawalFail = () => {
         <Txt>X Icon</Txt>
         <Txt>Your transaction is failed</Txt>
         <Txt>Do you want to make a new transaction?</Txt>
-        <Txt>We are running out of bank note</Txt>
+        <Txt>{errorMessage}</Txt>
         <Flex w="full" justifyContent="space-between" alignItems="center">
           <Button onClick={goToMainMenu}>Confirm</Button>
           <Button onClick={exit}>Cancel</Button>
@@ -48,34 +52,31 @@ const PendingWithdrawalRequest = () => {
 }
 
 export const WithdrawCash = () => {
-  const limit = 1000
-  const prefix = '£'
-  const [value, setValue] = useState<string | number>(123)
-  const [loading, setLoading] = useState(false)
-  const handleOnValueChange: CurrencyInputProps['onValueChange'] = value => {
-    setValue(value ?? '')
-  }
-  const success = false
-  const fail = true
-  if (loading) return <PendingWithdrawalRequest />
-  if (success) return <WithdrawalSuccess />
-  if (fail) return <WithdrawalFail />
+  const [withdrawCash, result] = useWithdrawCash()
+  const { balance, pin } = useUserInformation<User>()
+  const [requestAmount, setRequestAmount] = useState<string>()
+  if (result.isLoading) return <PendingWithdrawalRequest />
+  if (result.isSuccess) return <WithdrawalSuccess />
+  if (result.isError)
+    return <WithdrawalFail errorMessage={result?.error?.message} />
   return (
     <Stack w="full" spacing={5} justifyContent="center" alignItems="center">
       <CurrencyInput
         name="withdrawal"
-        value={value}
+        value={requestAmount}
         allowDecimals={false}
-        onValueChange={handleOnValueChange}
+        onValueChange={requestAmount => {
+          setRequestAmount(requestAmount ?? '')
+        }}
         placeholder="Please enter a number"
-        prefix={prefix}
+        prefix={getCurrencySymbol(balance.currency)}
         step={1}
       />
       <HStack spacing={5}>
         <Button
-          isDisabled={Number(value) > limit}
           type="submit"
-          onClick={() => setLoading(true)}
+          isDisabled={!requestAmount}
+          onClick={() => withdrawCash({ pin, amount: Number(requestAmount) })}
         >
           Confirm
         </Button>
