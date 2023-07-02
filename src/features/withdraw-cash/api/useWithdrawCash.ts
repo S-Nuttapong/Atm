@@ -1,4 +1,4 @@
-import { MockAtmServices } from "@entities/atm/mockAtmService";
+import { MockAtmServices } from "@entities/atm/mockAtmServices";
 import { MockUserServices } from "@entities/user";
 import { WithdrawalCashService } from "@features/withdraw-cash/api/WithdrawCashService";
 import { useMutation, useQueryClient } from "@shared/react-query";
@@ -38,7 +38,7 @@ export const useWithdrawCash = () => {
     return separateMutationAndResult(withdrawCashMutation);
 }
 
-const separateMutationAndResult = <TData = unknown, TError = unknown, TVariables = unknown, TContext = unknown>(mutationResult: UseBaseMutationResult<TData, TError, TVariables, TContext>) => {
+const separateMutationAndResult = <TData = unknown, TError = Error, TVariables = unknown, TContext = unknown>(mutationResult: UseBaseMutationResult<TData, TError, TVariables, TContext>) => {
     const { mutate, ...rest } = mutationResult;
     return [mutate, rest] as const;
 }
