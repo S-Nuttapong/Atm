@@ -35,6 +35,9 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
+  remeda:
+    specifier: ^1.23.0
+    version: 1.23.0
 
 devDependencies:
   '@types/node':
@@ -3024,6 +3027,10 @@ packages:
 
   /regenerator-runtime@0.13.11:
     resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
+    dev: false
+
+  /remeda@1.23.0:
+    resolution: {integrity: sha512-1y0jygsAc3opoFQW5BtA/QYOboai0u5IwdvwtbRAd1eJ2D9NmvZpDfV819LdSmrIQ0LONbp/dE9Uo/rGxUshPw==}
     dev: false
 
   /remove-accents@0.4.2:

@@ -1,6 +1,7 @@
-import { useQuery as tanstackUseQuery } from "@tanstack/react-query";
+import { QueryClient, useQuery as tanstackUseQuery } from "@tanstack/react-query";
 
 export { QueryCache, QueryClient, QueryClientProvider, useMutation, useQueryClient } from "@tanstack/react-query";
+export type { UseMutationResult } from "@tanstack/react-query";
 export { separateQueryOperationAndResult } from "./separateQueryOperationAndResult";
 
 /**
@@ -10,3 +11,4 @@ export { separateQueryOperationAndResult } from "./separateQueryOperationAndResu
  */
 export const useQuery = tanstackUseQuery
 
+export const client = new QueryClient()

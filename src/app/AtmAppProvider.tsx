@@ -1,10 +1,9 @@
 import { TransactionNavigationProvider } from '@entities/transaction'
+import { QueryClientProvider, client } from '@shared/react-query'
 import { ComponentWithChildren } from '@shared/types'
 import { ThemeProvider, theme } from '@shared/ui'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-const client = new QueryClient()
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 export const AtmAppProvider: ComponentWithChildren = ({ children }) => (
   <QueryClientProvider client={client}>
