@@ -1,4 +1,4 @@
-import { AtmBankNotes, AtmConfigs } from "./mockAtmService";
+import { AtmBankNotes, AtmConfigs } from "./mockAtmServices";
 
 export abstract class AtmServices {
     abstract banknotes(): Promise<AtmBankNotes>;

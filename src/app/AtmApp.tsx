@@ -5,9 +5,10 @@ import {
 import { EnterPin } from '@features/enter-pin'
 import { WithdrawCash } from '@features/withdraw-cash'
 import { Transaction } from '@shared/types'
-import { Box, Button, Flex, Stack, Txt } from '@shared/ui'
+import { Box, Flex } from '@shared/ui'
 import { ComponentType } from 'react'
 import { AtmLayout } from './AtmLayout'
+import { TransactionNotAvailable } from './TransactionNotAvailable'
 
 type AtmTransactionUiMap = Record<Transaction, ComponentType>
 
@@ -18,22 +19,6 @@ const allTransactions: Transaction[] = [
   'ViewBalance',
   'WithdrawCash',
 ]
-
-const TransactionNotAvailable = () => {
-  const { goToMainMenu, exit } = useTransactionNavigation()
-  return (
-    <Flex w="full" justifyContent="center">
-      <Stack justifyContent="center" textAlign="center">
-        <Txt>Service not available at the moment</Txt>
-        <Txt>Do you want to make a new transaction?</Txt>
-        <Flex w="full" justifyContent="space-between" alignItems="center">
-          <Button onClick={goToMainMenu}>Confirm</Button>
-          <Button onClick={exit}>Cancel</Button>
-        </Flex>
-      </Stack>
-    </Flex>
-  )
-}
 
 const defaultAtmTransaction = allTransactions.reduce((map, transaction) => {
   map[transaction] = TransactionNotAvailable

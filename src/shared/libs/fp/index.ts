@@ -1,2 +1,2 @@
-export { first, isString, last, pipe, sort, sortBy } from 'remeda';
+export { first, isError, isString, last, pipe, sort, sortBy } from 'remeda';
 

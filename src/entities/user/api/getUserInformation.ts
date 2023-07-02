@@ -1,6 +1,4 @@
-import { userConfig } from '@entities/user';
 import { api } from '@shared/apis';
-import { separateQueryOperationAndResult, useQuery } from '@shared/react-query';
 import { PinVerificationResponse, User } from '@shared/types';
 import axios from 'axios';
 
@@ -36,17 +34,5 @@ export const getUserInformation = async (pin: string) => {
             value: response.data.currentBalance,
         }
     } satisfies User
-}
-
-export const useGetUserInformation = (pin: string, configs = {} as UserVerifyPinConfigs) => {
-    const data = useQuery({
-        queryKey: [userConfig.entry, pin],
-        queryFn: () => getUserInformation(pin),
-        retry: false,
-        enabled: false,
-        staleTime: 60000, // Set the staleTime to 1 minute (adjust as needed),
-        ...configs,
-    })
-    return separateQueryOperationAndResult(data)
 }
 

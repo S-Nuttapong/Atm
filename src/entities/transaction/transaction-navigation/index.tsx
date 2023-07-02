@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 interface ITransactionNavigationContext {
   navigate: (transaction: Transaction) => void
-  goToMainMenu: () => void
+  backToMainMenu: () => void
   exit: () => void
   transaction: Transaction
 }
@@ -24,11 +24,11 @@ const defaultTransaction: Transaction = 'EnterPin'
 const TransactionNavigationProvider: TransactionNavigationProvider = props => {
   const initialTransaction = props?.transaction ?? defaultTransaction
   const [transaction, navigate] = useState(initialTransaction)
-  const goToMainMenu = () => navigate('TransactionsMenu')
+  const backToMainMenu = () => navigate('TransactionsMenu')
   const exit = () => navigate('EnterPin')
 
   return (
-    <context.Provider value={{ transaction, goToMainMenu, exit, navigate }}>
+    <context.Provider value={{ transaction, backToMainMenu, exit, navigate }}>
       {props?.children}
     </context.Provider>
   )

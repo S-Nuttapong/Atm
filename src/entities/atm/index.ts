@@ -1,3 +1,3 @@
-export { mockAtmService } from "./mockAtmService"
+export { MockAtmServices } from "./mockAtmServices"
 export * from "./types"
 

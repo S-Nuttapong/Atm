@@ -1,5 +1,6 @@
 import { useTransactionNavigation } from '@entities/transaction'
-import { useGetUserInformation } from '@entities/user/useGetUserInformation'
+import { useEnterPin } from '@features/enter-pin/useEnterPin'
+
 import {
   Button,
   Flex,
@@ -12,13 +13,15 @@ import {
 } from '@shared/ui'
 import { useState } from 'react'
 
-const pinIsInvalid = (pin: string) => pin.length === 4
+const passwordLength = 4
+const passWordDigits = new Array(passwordLength).fill(null)
+const pinIsInvalid = (pin: string) => pin.length === passwordLength
 
 export const EnterPin = () => {
   const [pin, setPin] = useState('')
-  const { goToMainMenu } = useTransactionNavigation()
-  const [getUserInfo, result] = useGetUserInformation(pin, {
-    onSuccess: goToMainMenu,
+  const { backToMainMenu } = useTransactionNavigation()
+  const [enterPin, result] = useEnterPin(pin, {
+    onSuccess: backToMainMenu,
   })
   return (
     <FormControl>
@@ -31,17 +34,18 @@ export const EnterPin = () => {
               manageFocus
               value={pin}
               onChange={pin => setPin(pin)}
+              size="lg"
             >
-              <PinInputField />
-              <PinInputField />
-              <PinInputField />
-              <PinInputField />
+              {passWordDigits.map(() => (
+                <PinInputField color="primary.500" />
+              ))}
             </PinInput>
           </HStack>
           <Button
+            variant="primary"
             isLoading={result.isFetching}
             isDisabled={!pinIsInvalid(pin)}
-            onClick={() => getUserInfo()}
+            onClick={() => enterPin()}
           >
             Confirm
           </Button>

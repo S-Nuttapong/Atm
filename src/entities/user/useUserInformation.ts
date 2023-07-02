@@ -5,7 +5,8 @@ import { User } from "@shared/types";
 
 export const useUserInformation = <TResult = User | undefined>(pin?: string) => {
     const queryCache = useQueryClient().getQueryCache()
-    return (pin ? findUserByPin(queryCache, pin) : getLastLoginUser(queryCache)) as TResult
+    const user = pin ? findUserByPin(queryCache, pin) : getLastLoginUser(queryCache)
+    return (user ?? {}) as TResult
 };
 
 function findUserByPin(queryCache: QueryCache, pin: string) {

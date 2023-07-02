@@ -1,4 +1,4 @@
-import { MockAtmServices } from "@entities/atm/mockAtmService"
+import { MockAtmServices } from "@entities/atm/mockAtmServices"
 import { useQuery } from "@shared/react-query"
 
 export const useAtmBanknotes = (AtmSerivce = MockAtmServices) => {
