@@ -1,12 +1,12 @@
+import { Button, Flex, Heading, Stack } from '@shared/design-system'
 import { ComponentWithChildren } from '@shared/types'
-import { Flex } from '@shared/ui'
 
 export const AtmLayout: ComponentWithChildren = ({ children }) => (
   <Flex
     w="full"
     h="full"
     maxH={500}
-    maxW={500}
+    maxW={1000}
     bg="bg.primary"
     alignItems="center"
     justifyItems="center"
@@ -17,6 +17,14 @@ export const AtmLayout: ComponentWithChildren = ({ children }) => (
     px={14}
     py={16}
   >
-    {children}
+    <Stack w="full" spacing={20}>
+      <Flex w="full" justifyContent="space-between" alignItems="center">
+        <Heading variant="h1">Enter Pin</Heading>
+        <Button variant="outline" w="full" maxW={150}>
+          Exit
+        </Button>
+      </Flex>
+      {children}
+    </Stack>
   </Flex>
 )

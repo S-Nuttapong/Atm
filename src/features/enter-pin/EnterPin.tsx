@@ -10,7 +10,7 @@ import {
   PinInputField,
   Stack,
   Txt,
-} from '@shared/ui'
+} from '@shared/design-system'
 import { useState } from 'react'
 
 const passwordLength = 4

@@ -1,5 +1,5 @@
+import { Button, Grid } from '@shared/design-system'
 import { Transaction } from '@shared/types'
-import { Button, Grid } from '@shared/ui'
 import { useTransactionNavigation } from './transaction-navigation'
 
 //2 by 2 on all view, except mobile: they will be wrap into single column instead

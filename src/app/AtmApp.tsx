@@ -5,8 +5,8 @@ import {
 } from '@entities/transaction'
 import { EnterPin } from '@features/enter-pin'
 import { WithdrawCash } from '@features/withdraw-cash'
+import { Box, Flex } from '@shared/design-system'
 import { Transaction } from '@shared/types'
-import { Box, Flex } from '@shared/ui'
 import { ComponentType } from 'react'
 import { AtmLayout } from './AtmLayout'
 

@@ -1,5 +1,5 @@
 import { useTransactionNavigation } from '@entities/transaction'
-import { Button, Flex, Stack, Txt } from '@shared/ui'
+import { Button, Flex, Stack, Txt } from '@shared/design-system'
 
 export const TransactionNotAvailable = () => {
   const { backToMainMenu, exit } = useTransactionNavigation()

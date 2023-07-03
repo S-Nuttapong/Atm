@@ -7,6 +7,7 @@ export {
   FormLabel,
   Grid,
   HStack,
+  Heading,
   Input,
   PinInput,
   PinInputField,
