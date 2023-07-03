@@ -10,7 +10,7 @@ import { ComponentWithChildren } from '@shared/types'
 export const AtmAppProvider: ComponentWithChildren = ({ children }) => (
   <QueryClientProvider client={client}>
     <ThemeProvider theme={theme}>
-      <TransactionNavigationProvider transaction="ChangePin">
+      <TransactionNavigationProvider>
         {children}
         <ReactQueryDevtools initialIsOpen={false} />
       </TransactionNavigationProvider>
