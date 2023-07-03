@@ -41,15 +41,26 @@ export const EnterPin = () => {
               ))}
             </PinInput>
           </HStack>
-          <Button
-            variant="primary"
-            isLoading={result.isFetching}
-            isDisabled={!pinIsInvalid(pin)}
-            onClick={() => enterPin()}
-          >
-            Confirm
-          </Button>
-          {result.isError && <Txt color="red.500">PIN is not found!</Txt>}
+          <Stack w="full">
+            <Button
+              variant="primary"
+              isLoading={result.isFetching}
+              isDisabled={!pinIsInvalid(pin)}
+              onClick={() => enterPin()}
+            >
+              Confirm
+            </Button>
+            {result.isError && (
+              <Txt
+                textAlign="center"
+                variant="description"
+                color="content.warning"
+                fontSize="md"
+              >
+                PIN is not found
+              </Txt>
+            )}
+          </Stack>
         </Stack>
       </Flex>
     </FormControl>
