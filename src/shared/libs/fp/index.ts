@@ -1,4 +1,4 @@
-export { first, isError, isString, isTruthy, last, map, pipe, sort, sortBy } from 'remeda';
+export { first, isError, isString, isTruthy, last, map, noop, pipe, sort, sortBy } from 'remeda';
 export { capitalize } from "./capitalize";
 export { isFalsy } from "./isFalsy";
 export { joinBy } from "./joinBy";

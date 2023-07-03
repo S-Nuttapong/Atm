@@ -2,7 +2,7 @@ import { atmConfigs } from '@entities/atm'
 import { Button, Grid } from '@shared/design-system'
 import { isTruthy } from '@shared/libs/fp'
 import { Transaction } from '@shared/types'
-import { useTransactionNavigation } from './transaction-navigation'
+import { useAtmNavigation } from '../atm/atm-navigation'
 
 const twoByTwoWrapOnMobile = ['1fr', '1fr 1fr']
 
@@ -18,7 +18,7 @@ const transactions = atmConfigs.allTransactions.filter(transaction =>
 )
 
 export const TransactionsMenu = () => {
-  const { navigate } = useTransactionNavigation()
+  const { navigate } = useAtmNavigation()
 
   return (
     <Grid

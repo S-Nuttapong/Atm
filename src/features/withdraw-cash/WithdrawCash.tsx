@@ -1,4 +1,4 @@
-import { useTransactionNavigation } from '@entities/transaction'
+import { useAtmNavigation } from '@entities/atm'
 import { useUserInformation } from '@entities/user'
 import { useWithdrawCash } from '@features/withdraw-cash/api/useWithdrawCash'
 import { Button, Flex, Spinner, Stack, Txt } from '@shared/design-system'
@@ -6,10 +6,7 @@ import { getCurrencySymbol } from '@shared/libs/currency'
 import { User } from '@shared/types'
 import { useState } from 'react'
 import CurrencyInput from 'react-currency-input-field'
-import { isError } from 'remeda'
 import './CurrenyInput.css'
-import { WithdrawalFail } from './WithdrawalFail'
-import { WithdrawalSuccess } from './WithdrawalSuccess'
 
 const PendingWithdrawalRequest = () => {
   return (
@@ -21,17 +18,14 @@ const PendingWithdrawalRequest = () => {
 }
 
 export const WithdrawCash = () => {
-  const [withdrawCash, result] = useWithdrawCash()
+  const { backToMainMenu, navigate } = useAtmNavigation()
+  const [withdrawCash, result] = useWithdrawCash({
+    onSuccess: () => navigate('WithdrawCashSuccess'),
+  })
   const { balance, pin } = useUserInformation<User>()
-  const { backToMainMenu } = useTransactionNavigation()
   const [requestAmount, setRequestAmount] = useState<string>()
 
   if (result.isLoading) return <PendingWithdrawalRequest />
-
-  if (result.isSuccess) return <WithdrawalSuccess />
-
-  if (isError(result.error))
-    return <WithdrawalFail errorMessage={result.error.message} />
 
   return (
     <Flex h="full" w="full" justifyContent="center">

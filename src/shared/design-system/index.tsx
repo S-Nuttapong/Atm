@@ -2,6 +2,7 @@ export {
   Box,
   Button,
   Center,
+  Divider,
   Flex,
   FormControl,
   FormHelperText,
@@ -19,5 +20,7 @@ export {
   ThemeProvider,
   Text as Txt,
 } from '@chakra-ui/react'
+
+export type { StackProps } from '@chakra-ui/react'
 
 export { default as theme } from './theme'

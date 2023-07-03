@@ -2,8 +2,9 @@ import { MockAtmServices } from "@entities/atm/mockAtmServices";
 import { MockUserServices } from "@entities/user";
 import { WithdrawalCashService } from "@features/withdraw-cash/api/WithdrawCashService";
 import { useMutation, useQueryClient } from "@shared/react-query";
-import { User } from "@shared/types";
+import { DispensableBanknote, User } from "@shared/types";
 import { UseBaseMutationResult } from "@tanstack/react-query";
+import { noop } from "remeda";
 
 interface InputData {
     pin: string;
@@ -18,11 +19,21 @@ const withdrawCash = async (data: InputData) => {
     return await withdrawCashService.withdraw(amount);
 };
 
-export const useWithdrawCash = () => {
-    const queryClient = useQueryClient();
+type UseWithdrawCashConfigs = {
+    onSuccess?: ((data: {
+        remainingBalance: number;
+        banknotes: DispensableBanknote[];
+    }, variables: InputData, context: unknown) => unknown) | undefined
+}
 
+/**
+ * @todo expose onError configs 
+ */
+export const useWithdrawCash = (configs = {} as UseWithdrawCashConfigs) => {
+    const queryClient = useQueryClient();
+    const { onSuccess = noop } = configs
     const withdrawCashMutation = useMutation(withdrawCash, {
-        onSuccess: (data, variables) => {
+        onSuccess: (data, variables, context) => {
             const { pin } = variables;
             const user = queryClient.getQueryData(['user', pin]) as User
             const remainingBalance = data.remainingBalance;
@@ -32,6 +43,7 @@ export const useWithdrawCash = () => {
                     value: remainingBalance
                 }
             });
+            onSuccess(data, variables, context)
         }
     })
 

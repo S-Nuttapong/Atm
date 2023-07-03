@@ -1,4 +1,4 @@
-import { useTransactionNavigation } from '@entities/transaction'
+import { useAtmNavigation } from '@entities/transaction'
 import {
   Button,
   Center,
@@ -10,15 +10,9 @@ import {
 import { WrenchCircleIcon } from '@shared/design-system/icons'
 
 export const TransactionUnderMaintenance = () => {
-  const { backToMainMenu } = useTransactionNavigation()
+  const { backToMainMenu } = useAtmNavigation()
   return (
-    <Flex
-      w="full"
-      h="full"
-      justifyContent="center"
-      alignContent="baseline"
-      mt={[-20, 0, 0, 0]}
-    >
+    <Flex w="full" h="full" justifyContent="center" alignContent="baseline">
       <Stack
         spacing={8}
         h="full"

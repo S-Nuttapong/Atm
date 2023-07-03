@@ -1,42 +1,49 @@
-import { atmConfigs } from '@entities/atm'
-import {
-  TransactionUnderMaintenance,
-  TransactionsMenu,
-  useTransactionNavigation,
-} from '@entities/transaction'
+import { TransactionsMenu, useAtmNavigation } from '@entities/transaction'
 import { EnterPin } from '@features/enter-pin'
-import { WithdrawCash } from '@features/withdraw-cash'
-import { Box, Flex } from '@shared/design-system'
-import { Transaction } from '@shared/types'
-import { ComponentType } from 'react'
-import { AtmLayout } from './AtmLayout'
-
-type AtmTransactionUiMap = Record<Transaction, ComponentType>
-
-const defaultAtmTransaction = atmConfigs.allTransactions.reduce(
-  (map, transaction) => {
-    map[transaction] = TransactionUnderMaintenance
-    return map
-  },
-  {} as AtmTransactionUiMap
-)
-
-const AtmTransactionMap: AtmTransactionUiMap = {
-  ...defaultAtmTransaction,
-  EnterPin,
+import {
   WithdrawCash,
-  TransactionsMenu,
-}
+  WithdrawCashFail,
+  WithdrawCashSuccess,
+} from '@features/withdraw-cash'
+import { Box, Flex } from '@shared/design-system'
+import { AtmAppLayout } from './AtmAppLayout'
+import { defineAtmTransactionMap } from './defineAtmTransactionMap'
+
+const atmTransactionMap = defineAtmTransactionMap({
+  EnterPin: {
+    Component: EnterPin,
+    showExitButton: false,
+    title: 'Please Enter Your PIN',
+  },
+  WithdrawCashFailed: {
+    Component: WithdrawCashFail,
+    title: 'Your Transaction Cannot Be Completed...',
+    spacing: 20,
+  },
+  WithdrawCashSuccess: {
+    Component: WithdrawCashSuccess,
+    title: 'Please ensure to collect your cash',
+    spacing: 20,
+  },
+  WithdrawCash: {
+    Component: WithdrawCash,
+    title: 'Enter amount you wish to withdraw',
+  },
+  TransactionsMenu: {
+    Component: TransactionsMenu,
+    title: 'Choose your transaction',
+  },
+})
 
 function App() {
-  const { transaction } = useTransactionNavigation()
-  const AtmTransaction = AtmTransactionMap[transaction]
+  const { view } = useAtmNavigation()
+  const { Component: AtmView, ...layoutProps } = atmTransactionMap[view]
   return (
     <Box w="100vw" h="100vh" bg="bg.primary">
       <Flex h="full" w="full" alignItems="center" justifyContent="center">
-        <AtmLayout>
-          <AtmTransaction />
-        </AtmLayout>
+        <AtmAppLayout {...layoutProps}>
+          <AtmView />
+        </AtmAppLayout>
       </Flex>
     </Box>
   )

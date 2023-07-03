@@ -1,4 +1,4 @@
-import { TransactionNavigationProvider } from '@entities/transaction'
+import { AtmNavigationProvider } from '@entities/transaction'
 import { ThemeProvider, theme } from '@shared/design-system'
 import {
   QueryClientProvider,
@@ -10,10 +10,10 @@ import { ComponentWithChildren } from '@shared/types'
 export const AtmAppProvider: ComponentWithChildren = ({ children }) => (
   <QueryClientProvider client={client}>
     <ThemeProvider theme={theme}>
-      <TransactionNavigationProvider>
+      <AtmNavigationProvider view="WithdrawCashSuccess">
         {children}
         <ReactQueryDevtools initialIsOpen={false} />
-      </TransactionNavigationProvider>
+      </AtmNavigationProvider>
     </ThemeProvider>
   </QueryClientProvider>
 )

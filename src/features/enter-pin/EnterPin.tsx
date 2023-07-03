@@ -1,4 +1,4 @@
-import { useTransactionNavigation } from '@entities/transaction'
+import { useAtmNavigation } from '@entities/transaction'
 import { useEnterPin } from '@features/enter-pin/useEnterPin'
 
 import {
@@ -19,7 +19,7 @@ const pinIsInvalid = (pin: string) => pin.length === passwordLength
 
 export const EnterPin = () => {
   const [pin, setPin] = useState('')
-  const { backToMainMenu } = useTransactionNavigation()
+  const { backToMainMenu } = useAtmNavigation()
   const [enterPin, result] = useEnterPin(pin, {
     onSuccess: backToMainMenu,
   })
