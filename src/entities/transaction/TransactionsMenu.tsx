@@ -1,22 +1,21 @@
+import { atmConfigs } from '@entities/atm'
 import { Button, Grid } from '@shared/design-system'
-import { capitalizeBy } from '@shared/libs/fp'
+import { isTruthy } from '@shared/libs/fp'
 import { Transaction } from '@shared/types'
 import { useTransactionNavigation } from './transaction-navigation'
 
 const twoByTwoWrapOnMobile = ['1fr', '1fr 1fr']
 
-const transactions: Transaction[] = [
-  'Enter_Pin',
-  'Money_Transfer',
-  'View_Balance',
-  'Withdraw_Cash',
-]
-const capitalizeWordsSeparatedByUnderScore = capitalizeBy('_', ' ')
+const transactionTitleMap: Partial<Record<Transaction, string>> = {
+  EnterPin: 'Enter Pin',
+  MoneyTransfer: 'MoneyTransfer',
+  ViewBalance: 'View Balance',
+  WithdrawCash: 'Withdraw Cash',
+}
 
-const transactionsMenuData = transactions.map(transaction => ({
-  title: capitalizeWordsSeparatedByUnderScore(transaction),
-  transaction,
-}))
+const transactions = atmConfigs.allTransactions.filter(transaction =>
+  isTruthy(transactionTitleMap[transaction])
+)
 
 export const TransactionsMenu = () => {
   const { navigate } = useTransactionNavigation()
@@ -29,14 +28,14 @@ export const TransactionsMenu = () => {
       gridTemplateColumns={twoByTwoWrapOnMobile}
       gridGap={10}
     >
-      {transactionsMenuData.map(data => (
+      {transactions.map(transaction => (
         <Button
-          onClick={() => navigate(data.transaction)}
+          onClick={() => navigate(transaction)}
           variant="primary"
           size={'lg'}
-          key={data.title}
+          key={transaction}
         >
-          {data.title}
+          {transactionTitleMap[transaction]}
         </Button>
       ))}
     </Grid>

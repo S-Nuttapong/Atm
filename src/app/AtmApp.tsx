@@ -1,3 +1,4 @@
+import { atmConfigs } from '@entities/atm'
 import {
   TransactionNotAvailable,
   TransactionsMenu,
@@ -12,18 +13,13 @@ import { AtmLayout } from './AtmLayout'
 
 type AtmTransactionUiMap = Record<Transaction, ComponentType>
 
-const allTransactions: Transaction[] = [
-  'EnterPin',
-  'MoneyTransfer',
-  'TransactionsMenu',
-  'ViewBalance',
-  'WithdrawCash',
-]
-
-const defaultAtmTransaction = allTransactions.reduce((map, transaction) => {
-  map[transaction] = TransactionNotAvailable
-  return map
-}, {} as AtmTransactionUiMap)
+const defaultAtmTransaction = atmConfigs.allTransactions.reduce(
+  (map, transaction) => {
+    map[transaction] = TransactionNotAvailable
+    return map
+  },
+  {} as AtmTransactionUiMap
+)
 
 const AtmTransactionMap: AtmTransactionUiMap = {
   ...defaultAtmTransaction,

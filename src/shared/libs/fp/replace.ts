@@ -1,0 +1,1 @@
+export const replace = (target: string | RegExp, by: string) => (string: string) => string.replace(target, by)
