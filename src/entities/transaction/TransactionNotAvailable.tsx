@@ -1,11 +1,7 @@
-import {
-  MakeNewTransaction,
-  useTransactionNavigation,
-} from '@entities/transaction'
+import { MakeNewTransaction } from '@entities/transaction'
 import { Box, Flex, Heading, Stack, Txt } from '@shared/design-system'
 
 export const TransactionNotAvailable = () => {
-  const { backToMainMenu, exit } = useTransactionNavigation()
   return (
     <Flex w="full" h="full" justifyContent="center" alignContent="baseline">
       <Stack
