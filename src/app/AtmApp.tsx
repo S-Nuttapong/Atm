@@ -13,6 +13,7 @@ const atmTransactionMap = defineAtmTransactionMap({
   EnterPin: {
     Component: EnterPin,
     showExitButton: false,
+    showUsername: false,
     title: 'Please Enter Your PIN',
   },
   WithdrawCashFailed: {

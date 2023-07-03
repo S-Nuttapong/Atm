@@ -14,7 +14,8 @@ import { capitalize } from '@shared/libs/fp'
 import { ComponentWithChildren } from '@shared/types'
 
 export interface AtmAppLayoutProps extends Pick<StackProps, 'spacing'> {
-  showExitButton?: false
+  showExitButton?: boolean
+  showUsername?: boolean
   title?: string
 }
 
@@ -30,15 +31,21 @@ const DevEnvLinkToGithub = () => (
   </Link>
 )
 
-const getGreetingText = (userName: string) => `${userName}, Welcome!`
+const getGreetingText = (username: string) => `${username}, Welcome!`
 /**
  * @todo once BE is ready, utilize react-query hook to sense the pending state, block the exit button until server complete
  */
 export const AtmAppLayout: ComponentWithChildren<AtmAppLayoutProps> = props => {
-  const { showExitButton = true, children, title, spacing = 28 } = props
+  const {
+    showExitButton = true,
+    children,
+    title,
+    spacing = 28,
+    showUsername,
+  } = props
   const user = useUserInformation()
   const { exit } = useAtmNavigation()
-  const userName = capitalize(user?.firstName ?? '')
+  const username = capitalize(user?.firstName ?? '')
   return (
     <Flex
       position="relative"
@@ -68,8 +75,8 @@ export const AtmAppLayout: ComponentWithChildren<AtmAppLayoutProps> = props => {
           >
             <Stack>
               <Heading variant="h1">San Bank</Heading>
-              {userName && (
-                <Heading variant="h4">{getGreetingText(userName)}</Heading>
+              {showUsername && username && (
+                <Heading variant="h4">{getGreetingText(username)}</Heading>
               )}
             </Stack>
             {showExitButton && (
