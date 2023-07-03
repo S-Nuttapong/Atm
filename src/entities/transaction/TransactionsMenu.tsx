@@ -1,4 +1,5 @@
 import { Button, Grid } from '@shared/design-system'
+import { capitalizeBy } from '@shared/libs/fp'
 import { Transaction } from '@shared/types'
 import { useTransactionNavigation } from './transaction-navigation'
 
@@ -6,11 +7,19 @@ import { useTransactionNavigation } from './transaction-navigation'
 const gridStyle = ['1fr', '1fr 1fr']
 
 const transactions: Transaction[] = [
-  'EnterPin',
-  'MoneyTransfer',
-  'ViewBalance',
-  'WithdrawCash',
+  'Enter_Pin',
+  'Money_Transfer',
+  'View_Balance',
+  'Withdraw_Cash',
 ]
+const capitalizeWordsSeparatedByUnderScore = capitalizeBy('_', ' ')
+
+const transactionsMenuData = transactions.map(transaction => ({
+  title: capitalizeWordsSeparatedByUnderScore(transaction),
+  transaction,
+}))
+
+console.debug({ transactionsMenuData })
 
 export const TransactionsMenu = () => {
   const { navigate } = useTransactionNavigation()
@@ -23,14 +32,14 @@ export const TransactionsMenu = () => {
       gridTemplateColumns={gridStyle}
       gridGap={10}
     >
-      {transactions.map(transaction => (
+      {transactionsMenuData.map(data => (
         <Button
-          onClick={() => navigate(transaction)}
+          onClick={() => navigate(data.transaction)}
           variant="primary"
-          size="lg"
-          key={transaction}
+          size={'lg'}
+          key={data.title}
         >
-          {transaction}
+          {data.title}
         </Button>
       ))}
     </Grid>

@@ -1,0 +1,1 @@
+export const splitBy = (by: string) => (string: string) => string.split(by)

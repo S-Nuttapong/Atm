@@ -1,0 +1,1 @@
+export const joinBy = (by: string) => (stringList: string[]) => stringList.join(by)
