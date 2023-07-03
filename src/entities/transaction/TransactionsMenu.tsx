@@ -1,12 +1,12 @@
 import { atmConfigs } from '@entities/atm'
 import { Button, Grid } from '@shared/design-system'
 import { isTruthy } from '@shared/libs/fp'
-import { Transaction } from '@shared/types'
+import { TransactionName } from '@shared/types'
 import { useAtmNavigation } from '../atm/atm-navigation'
 
 const twoByTwoWrapOnMobile = ['1fr', '1fr 1fr']
 
-const transactionTitleMap: Partial<Record<Transaction, string>> = {
+const transactionTitleMap: Partial<Record<TransactionName, string>> = {
   ChangePin: 'Change Pin',
   MoneyTransfer: 'Money Transfer',
   ViewBalance: 'View Balance',
