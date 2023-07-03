@@ -38,10 +38,10 @@ const getGreetingText = (username: string) => `${username}, Welcome!`
 export const AtmAppLayout: ComponentWithChildren<AtmAppLayoutProps> = props => {
   const {
     showExitButton = true,
+    showUsername = true,
     children,
     title,
     spacing = 28,
-    showUsername,
   } = props
   const user = useUserInformation()
   const { exit } = useAtmNavigation()
