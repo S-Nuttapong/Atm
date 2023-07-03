@@ -10,7 +10,7 @@ import { ComponentWithChildren } from '@shared/types'
 export const AtmAppProvider: ComponentWithChildren = ({ children }) => (
   <QueryClientProvider client={client}>
     <ThemeProvider theme={theme}>
-      <AtmNavigationProvider view="WithdrawCashSuccess">
+      <AtmNavigationProvider>
         {children}
         <ReactQueryDevtools initialIsOpen={false} />
       </AtmNavigationProvider>
