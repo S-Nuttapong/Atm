@@ -38,7 +38,7 @@ export const AtmAppLayout: ComponentWithChildren<AtmAppLayoutProps> = props => {
   const { showExitButton = true, children, title, spacing = 28 } = props
   const user = useUserInformation()
   const { exit } = useAtmNavigation()
-  const userName = capitalize(user?.firstName ?? 'Micheal')
+  const userName = capitalize(user?.firstName ?? '')
   return (
     <Flex
       position="relative"
