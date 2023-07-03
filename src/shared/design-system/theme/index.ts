@@ -4,19 +4,23 @@ import { textTheme } from '@shared/design-system/theme/textTheme';
 import { colorPalette } from "./colorPalette";
 import { headingTheme } from "./headingTheme";
 
-const { primary, neutral } = colorPalette
+const { primary, neutral, red } = colorPalette
 
 export default extendTheme({
     colors: {
         ...colorPalette,
         bg: {
-            primary: primary[900]
+            primary: primary[900],
         },
         border: {
             primary: neutral[900]
         },
         content: {
-            primary: neutral[50]
+            primary: neutral[50],
+            warning: red[500]
+        },
+        button: {
+            primary: primary[500]
         }
     },
     fonts: {

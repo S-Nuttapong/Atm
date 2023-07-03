@@ -4,6 +4,7 @@ import { defineStyle, defineStyleConfig } from "@chakra-ui/styled-system"
 export const baseStyle = defineStyle({
     fontSize: 'md',
     fontWeight: 'normal',
+    margin: 0,
 })
 
 export const body1 = defineStyle({

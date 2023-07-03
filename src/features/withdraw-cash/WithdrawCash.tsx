@@ -1,7 +1,4 @@
-import {
-  MakeNewTransaction,
-  useTransactionNavigation,
-} from '@entities/transaction'
+import { useTransactionNavigation } from '@entities/transaction'
 import { useUserInformation } from '@entities/user'
 import { useWithdrawCash } from '@features/withdraw-cash/api/useWithdrawCash'
 import { Button, Flex, Spinner, Stack, Txt } from '@shared/design-system'
@@ -11,33 +8,8 @@ import { useState } from 'react'
 import CurrencyInput from 'react-currency-input-field'
 import { isError } from 'remeda'
 import './CurrenyInput.css'
-
-const WithdrawalSuccess = () => {
-  return (
-    <Flex w="full" h="full" justifyContent="center" alignItems="center">
-      <Stack alignItems="center">
-        <Txt>Check Icon</Txt>
-        <Txt>Your transaction is successful</Txt>
-        <Txt>Do you want to make a new transaction?</Txt>
-        <MakeNewTransaction />
-      </Stack>
-    </Flex>
-  )
-}
-
-const WithdrawalFail = ({ errorMessage }: { errorMessage: string }) => {
-  return (
-    <Flex w="full" h="full" justifyContent="center" alignItems="center">
-      <Stack alignItems="center">
-        <Txt>X Icon</Txt>
-        <Txt>Your transaction is failed</Txt>
-        <Txt>Do you want to make a new transaction?</Txt>
-        <Txt>{errorMessage}</Txt>
-        <MakeNewTransaction />
-      </Stack>
-    </Flex>
-  )
-}
+import { WithdrawalFail } from './WithdrawalFail'
+import { WithdrawalSuccess } from './WithdrawalSuccess'
 
 const PendingWithdrawalRequest = () => {
   return (
@@ -62,8 +34,8 @@ export const WithdrawCash = () => {
     return <WithdrawalFail errorMessage={result.error.message} />
 
   return (
-    <Flex w="full" justifyContent="center">
-      <Stack w="fit" spacing={5} alignItems="center">
+    <Flex h="full" w="full" justifyContent="center">
+      <Stack h="full" w="full" maxW={350} spacing={5} alignItems="center">
         <CurrencyInput
           name="withdrawal"
           autoComplete="off"
@@ -73,8 +45,8 @@ export const WithdrawCash = () => {
           onValueChange={requestAmount => {
             setRequestAmount(requestAmount ?? '')
           }}
-          placeholder="Please enter a number"
-          prefix={getCurrencySymbol(balance.currency)}
+          placeholder={`${getCurrencySymbol(balance?.currency ?? 'EUR')}100`}
+          prefix={getCurrencySymbol(balance?.currency ?? 'EUR')}
           step={1}
         />
         <Flex w="full" justifyContent="space-between" gap={5}>
@@ -82,6 +54,9 @@ export const WithdrawCash = () => {
             variant="primary"
             isDisabled={!requestAmount}
             onClick={() => withdrawCash({ pin, amount: Number(requestAmount) })}
+            minW="fit-content"
+            w="full"
+            maxW={150}
           >
             Confirm
           </Button>
@@ -89,6 +64,9 @@ export const WithdrawCash = () => {
             variant="outline"
             onClick={backToMainMenu}
             isDisabled={result.isLoading}
+            minW="fit-content"
+            w="full"
+            maxW={150}
           >
             Cancel
           </Button>

@@ -62,6 +62,7 @@ const h4 = defineStyle({
 export const headingTheme = defineStyleConfig({
     baseStyle: {
         color: 'gray.900',
+        margin: 0,
     },
     variants: {
         "h1": h1,

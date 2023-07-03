@@ -8,7 +8,7 @@ export const AtmLayout: ComponentWithChildren = ({ children }) => (
     maxH={500}
     maxW={1000}
     bg="bg.primary"
-    alignItems="center"
+    alignItems="baseline"
     justifyItems="center"
     border="solid"
     borderWidth={2}
@@ -17,12 +17,13 @@ export const AtmLayout: ComponentWithChildren = ({ children }) => (
     px={14}
     py={16}
   >
-    <Stack w="full" spacing={20}>
+    <Stack h="full" w="full" spacing={28}>
       <Flex
         w="full"
         justifyContent="space-between"
         alignItems="center"
-        display={['none', 'flex', 'flex', 'flex']}
+        wrap="wrap"
+        gap={5}
       >
         <Heading variant="h1">San Bank</Heading>
         <Button variant="outline" w="full" maxW={150}>

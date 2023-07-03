@@ -8,6 +8,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
+      "@shared/libs/design-system/icons": path.resolve(sourcePath, "shared/libs/design-system/icons/"),
       "@shared": path.resolve(sourcePath, "shared/"),
       "@shared/libs": path.resolve(sourcePath, "shared/libs/"),
       "@entities": path.resolve(sourcePath, "entities/"),
