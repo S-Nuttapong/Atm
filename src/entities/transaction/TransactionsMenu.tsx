@@ -7,8 +7,8 @@ import { useTransactionNavigation } from './transaction-navigation'
 const twoByTwoWrapOnMobile = ['1fr', '1fr 1fr']
 
 const transactionTitleMap: Partial<Record<Transaction, string>> = {
-  EnterPin: 'Enter Pin',
-  MoneyTransfer: 'MoneyTransfer',
+  ChangePin: 'Change Pin',
+  MoneyTransfer: 'Money Transfer',
   ViewBalance: 'View Balance',
   WithdrawCash: 'Withdraw Cash',
 }

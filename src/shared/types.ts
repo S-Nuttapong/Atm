@@ -3,7 +3,7 @@ import { FC, PropsWithChildren } from "react";
 
 export type ComponentWithChildren<P = unknown> = FC<PropsWithChildren<P>>
 
-export type Transaction = 'WithdrawCash' | 'EnterPin' | 'ViewBalance' | 'MoneyTransfer' | 'TransactionsMenu'
+export type Transaction = 'WithdrawCash' | 'EnterPin' | 'ViewBalance' | 'MoneyTransfer' | 'TransactionsMenu' | 'ChangePin'
 
 export type UseVerifyPinConfigs = {
     onSuccess?: (data: User, variables: string, context: unknown) => void | Promise<unknown>

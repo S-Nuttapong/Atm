@@ -5,7 +5,8 @@ const allTransactions: Transaction[] = [
     'MoneyTransfer',
     'ViewBalance',
     'WithdrawCash',
-    'TransactionsMenu'
+    'TransactionsMenu',
+    'ChangePin'
 ]
 
 export const atmConfigs = {
