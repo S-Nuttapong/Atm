@@ -1,6 +1,6 @@
 import { atmConfigs } from '@entities/atm'
 import {
-  TransactionNotAvailable,
+  TransactionUnderMaintenance,
   TransactionsMenu,
   useTransactionNavigation,
 } from '@entities/transaction'
@@ -15,7 +15,7 @@ type AtmTransactionUiMap = Record<Transaction, ComponentType>
 
 const defaultAtmTransaction = atmConfigs.allTransactions.reduce(
   (map, transaction) => {
-    map[transaction] = TransactionNotAvailable
+    map[transaction] = TransactionUnderMaintenance
     return map
   },
   {} as AtmTransactionUiMap

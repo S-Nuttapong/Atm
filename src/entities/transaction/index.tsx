@@ -1,5 +1,5 @@
 export { MakeNewTransaction } from './MakeNewTransction'
-export { TransactionNotAvailable } from './TransactionNotAvailable'
+export { TransactionUnderMaintenance } from './TransactionUnderMaintenance'
 export { TransactionsMenu } from './TransactionsMenu'
 export {
   TransactionNavigationProvider,
