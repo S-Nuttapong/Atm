@@ -10,6 +10,7 @@ export {
   HStack,
   Heading,
   Input,
+  Link,
   PinInput,
   PinInputField,
   PinInputProvider,

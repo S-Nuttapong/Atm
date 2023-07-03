@@ -1,17 +1,31 @@
 import { useTransactionNavigation } from '@entities/transaction'
-import { Button, Flex, Heading, Stack } from '@shared/design-system'
+import { Button, Flex, Heading, Link, Stack } from '@shared/design-system'
+import { GithubIcon } from '@shared/design-system/icons'
 import { ComponentWithChildren } from '@shared/types'
+
+const DevEnvLinkToGithub = () => (
+  <Link href="https://github.com/S-Nuttapong/Atm" isExternal>
+    <GithubIcon
+      color="content.primary"
+      boxSize={5}
+      position="absolute"
+      top="10px"
+      right="10px"
+    />
+  </Link>
+)
 
 export const AtmLayout: ComponentWithChildren = ({ children }) => {
   const { exit } = useTransactionNavigation()
   return (
     <Flex
+      position="relative"
       w="full"
       h="full"
-      maxH={500}
+      maxH={['full', 500, 500]}
       maxW={1000}
       bg="bg.primary"
-      alignItems="baseline"
+      alignItems={['center', 'baseline', 'baseline']}
       justifyItems="center"
       border="solid"
       borderWidth={2}
@@ -20,7 +34,8 @@ export const AtmLayout: ComponentWithChildren = ({ children }) => {
       px={14}
       py={16}
     >
-      <Stack h="full" w="full" spacing={28}>
+      <DevEnvLinkToGithub />
+      <Stack w="full" spacing={28}>
         <Flex
           w="full"
           justifyContent="space-between"

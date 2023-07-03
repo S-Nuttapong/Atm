@@ -1,4 +1,5 @@
 export { CheckCircleIcon } from './CheckCircleIcon'
 export { CloseCircleIcon } from './CloseCircleIcon'
+export { GithubIcon } from './GithubIcon'
 export { WrenchCircleIcon } from './WrenchCircleIcon'
 export { WrenchIcon } from './WrenchIcon'
