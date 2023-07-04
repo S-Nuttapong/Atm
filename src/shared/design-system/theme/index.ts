@@ -17,7 +17,8 @@ export default extendTheme({
         },
         content: {
             primary: neutral[50],
-            warning: red[500]
+            warning: red[500],
+            form: neutral[300]
         },
         button: {
             primary: primary[500]

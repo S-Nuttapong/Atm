@@ -5,11 +5,11 @@ import {
   Button,
   Flex,
   FormControl,
+  FormHelperText,
   HStack,
   PinInput,
   PinInputField,
   Stack,
-  Txt,
 } from '@shared/design-system'
 import { useState } from 'react'
 
@@ -45,20 +45,15 @@ export const EnterPin = () => {
             <Button
               variant="primary"
               isLoading={result.isFetching}
-              isDisabled={!pinIsInvalid(pin)}
+              isDisabled={!pinIsInvalid(pin) || result.isError}
               onClick={() => enterPin()}
             >
               Confirm
             </Button>
             {result.isError && (
-              <Txt
-                textAlign="center"
-                variant="description"
-                color="content.warning"
-                fontSize="md"
-              >
+              <FormHelperText color="content.form">
                 Invalid PIN. Please check your PIN and try again.
-              </Txt>
+              </FormHelperText>
             )}
           </Stack>
         </Stack>

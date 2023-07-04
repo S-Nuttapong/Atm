@@ -19,6 +19,9 @@ export interface AtmAppLayoutProps extends Pick<StackProps, 'spacing'> {
   title?: string
 }
 
+/**
+ * @todo lazy load, and selectively load on dev env
+ */
 const DevEnvLinkToGithub = () => (
   <Link href="https://github.com/S-Nuttapong/Atm" isExternal>
     <GithubIcon
