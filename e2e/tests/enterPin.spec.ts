@@ -1,7 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { enterPin } from "../utils";
 
-//TODO: add more login features, biometric login: finger print, face again
 test.describe('login by entering the PIN', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto('/')

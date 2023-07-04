@@ -1,5 +1,5 @@
-import { MockAtmRepository } from "@entities/atm/AtmRepository";
-import { MockUserRepository } from "@entities/user/userRepository";
+import { MockAtmRepository } from "@entities/atm";
+import { MockUserRepository } from "@entities/user";
 import { WithdrawalCashService } from "@features/withdraw-cash/api/WithdrawCashService";
 import { DispensableBanknote, User } from "@shared/api";
 import { noop } from "@shared/libs/fp";

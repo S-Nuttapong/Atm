@@ -1,5 +1,8 @@
 import { Page } from '@playwright/test';
 
+/**
+ * @todo mock out real response instead of calling DB
+ */
 export const enterPin = async (page: Page, pin: string) => {
     await page.getByPlaceholder('○').first().click();
     await page.getByRole('textbox', { name: 'Please enter your pin code' }).first().fill(pin);
