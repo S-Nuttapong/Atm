@@ -8,6 +8,8 @@ This app is merely for the purpose of demonstration on how I go about architectu
 
 ### [Demo](https://atm-s-nuttapong.vercel.app/)
 
+![ATM app](docs/Screen Shot 2566-07-04 at 17.52.50.png)
+
 ## TODO
 
 - consolidate the business features, and the entities/domains object, and update the architecture according
