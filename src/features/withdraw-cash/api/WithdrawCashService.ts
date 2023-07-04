@@ -19,7 +19,7 @@ const calculateRemainingBalance = (balance: number, amount: number, overdraft: n
 
 /**
  * BE implementation
- * @todo as of now the services are required, but once BE is available we can apply dependency injection, so consumers of this do not have to instantiate the service every time, better DX
+ * @todo as of now the repositories / the DTO are required, but once BE is available we can apply dependency injection, so consumers of this do not have to instantiate the repositories every time, hence better DX
  * @todo stress tests this module, particularly withdraw amount, once the requirement has been consolidated
  * @todo delegate to BE
  * @todo check the business logic with stake holders again what it means to dispense the notes evenly? number of notes wise, note value (denomination * count) wise, or how?
