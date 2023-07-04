@@ -4,7 +4,7 @@
 
 ### Disclaimer
 
-This app is merely for the purpose of demonstrating how I go about architecting the app for maintainability, choosing the technology that is logical for the business, and sharing my approach to how I go about testing. There is a lot of assumptions about the business requirement, there is no BE, to say the least, and this app does not persist the data, therefore everything you see will start over upon refreshing the page
+This app is merely for the purpose of demonstrating how I go about architecting the app for maintainability, choosing the technology that is logical for the business, and sharing my approach to how I go about testing. There are a lot of assumptions about the business requirements, there is no BE, to say the least, and this app does not persist the data, therefore everything you see will start over upon refreshing the page
 
 ### [Demo](https://atm-s-nuttapong.vercel.app/)
 
