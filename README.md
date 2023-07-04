@@ -8,7 +8,7 @@ This app is merely for the purpose of demonstration on how I go about architectu
 
 ### [Demo](https://atm-s-nuttapong.vercel.app/)
 
-[ATM app](docs/Screen Shot 2566-07-04 at 17.52.50.png)
+!\[Alternate Text\](docs/application-image-for-readme.png)
 
 ## TODO
 
