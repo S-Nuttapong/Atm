@@ -32,6 +32,7 @@
   "devDependencies": {
     "@chakra-ui/cli": "^2.4.1",
     "@chakra-ui/styled-system": "^2.9.1",
+    "@playwright/test": "^1.35.1",
     "@types/node": "^20.3.2",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
@@ -41,6 +42,7 @@
     "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
+    "playwright": "^1.35.1",
     "typescript": "^5.0.2",
     "vite": "^4.3.9"
   }
