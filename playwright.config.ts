@@ -24,7 +24,12 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',
+    /**
+     * we can test different page upon api env from process.env.CI
+     * if this is production we might wanna test on product website/sandbox
+     * same goes to product; staging env can apply the same practice
+     */
+    baseURL: 'http://localhost:3000/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -64,7 +69,7 @@ export default defineConfig({
     // },
     // {
     //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+    //   use: { ..devices['Desktop Chrome'], channel: 'chrome' },
     // },
   ],
 

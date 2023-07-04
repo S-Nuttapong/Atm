@@ -1,7 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { Browser, Page, chromium } from 'playwright';
-import { startAtmApp, stopAtmApp } from './atmUtils';
-import { confirmWithdrawal, enterWithdrawalAmount, loginUser, navigateToWithdrawCash } from './authUtils';
+import { confirmWithdrawal, enterWithdrawalAmount, loginUser, navigateToWithdrawCash, startAtmApp, stopAtmApp } from './atmUtils';
 
 test.describe('Cash Withdrawal', () => {
     let browser: Browser;
@@ -11,7 +10,7 @@ test.describe('Cash Withdrawal', () => {
         browser = await chromium.launch(); // You can change the browser type here (firefox, chromium, webkit)
         const context = await browser.newContext();
         page = await context.newPage();
-        await startAtmApp(page); // Start the ATM app
+        await startAtmApp(); // Start the ATM app
     });
 
     test.afterAll(async () => {
@@ -20,7 +19,7 @@ test.describe('Cash Withdrawal', () => {
     });
 
     test.beforeEach(async () => {
-        await loginUser(page); // Log in the user
+        await loginUser(page, '1111'); // Log in the user
         await navigateToWithdrawCash(page); // Navigate to the "Withdraw Cash" screen
     });
 

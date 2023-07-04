@@ -4,7 +4,7 @@ import { Browser, Page, chromium } from 'playwright';
 export const startAtmApp = async (): Promise<[Browser, Page]> => {
     const browser = await chromium.launch(); // or 'firefox' for Firefox browser
     const page = await browser.newPage();
-    await page.goto('http://localhost:3000'); // Replace the URL with the actual URL of your ATM app
+    await page.goto('/'); // Replace the URL with the actual URL of your ATM app
 
     return [browser, page];
 };
