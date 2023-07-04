@@ -1,12 +1,9 @@
-import { first, last, pipe } from "remeda";
-
-// const a = { 100: 5, 80: 3, 20: 1 }
-// const inputs = [[100, a], [560, a], [160, a], [240, a], [375, { 100: 5, 50: 3, 20: 20, 10: 5, 5: 1 }], [120, a], [800, { 100: 5, 50: 3 }]].filter(i => i[0])
+import { first, last, pipe } from "@shared/libs/fp";
 
 export function getBanknotesToDispense(atmBanknotes: Record<number, number>, requestAmount: number) {
     const totalDispensableAmount = getTotalDispensableAmount(atmBanknotes)
 
-    if (requestAmount > totalDispensableAmount) return `There is not enough money in the ATM, maximum: ${totalDispensableAmount}`
+    if (requestAmount > totalDispensableAmount) return `Insufficient Funds: The ATM does not have sufficient funds available. The maximum withdrawal limit is set at ${totalDispensableAmount}`
 
     return searchNotes(atmBanknotes, requestAmount);
 }

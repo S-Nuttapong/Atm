@@ -1,13 +1,11 @@
 import { useAtmNavigation } from '@entities/atm'
-import { useWithdrawCash } from '@features/withdraw-cash/api/useWithdrawCash'
+import { useWithdrawCashError } from '@features/withdraw-cash/withdraw-cash-failed'
 import { Button, Flex, Heading, Stack, Txt } from '@shared/design-system'
 import { CloseCircleIcon } from '@shared/design-system/icons'
-import { parseErrorMessage } from '@shared/libs/parser'
 
 export const WithdrawCashFail = () => {
-  const [_, result] = useWithdrawCash()
+  const { error } = useWithdrawCashError()
   const { backToMainMenu } = useAtmNavigation()
-  const errorMessage = parseErrorMessage(result.error)
   return (
     <Flex w="full" h="full" justifyContent="center" alignItems="center">
       <Stack spacing={8} alignItems="center">
@@ -21,9 +19,11 @@ export const WithdrawCashFail = () => {
           <Heading as="h2" color="content.primary">
             Transaction Failed
           </Heading>
-          <Txt variant="description" color="neutral.100" fontSize="sm">
-            {errorMessage}
-          </Txt>
+          {error.message && (
+            <Txt variant="description" color="neutral.100" fontSize="sm">
+              {error.message}
+            </Txt>
+          )}
         </Stack>
         <Button variant="primary" onClick={backToMainMenu}>
           Make New Transaction

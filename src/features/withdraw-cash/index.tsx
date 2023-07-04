@@ -1,3 +1,8 @@
 export { WithdrawCash } from './WithdrawCash'
-export { WithdrawCashFail } from './WithdrawCashFail'
 export { WithdrawCashSuccess } from './WithdrawCashSuccess'
+export { useWithdrawCash } from './api'
+export {
+  WithdrawCashErrorProvider,
+  WithdrawCashFail,
+  useWithdrawCashError,
+} from './withdraw-cash-failed'

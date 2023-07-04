@@ -1,4 +1,5 @@
 import { AtmNavigationProvider } from '@entities/transaction'
+import { WithdrawCashErrorProvider } from '@features/withdraw-cash'
 import { ThemeProvider, theme } from '@shared/design-system'
 import {
   QueryClientProvider,
@@ -11,7 +12,7 @@ export const AtmAppProvider: ComponentWithChildren = ({ children }) => (
   <QueryClientProvider client={client}>
     <ThemeProvider theme={theme}>
       <AtmNavigationProvider>
-        {children}
+        <WithdrawCashErrorProvider>{children}</WithdrawCashErrorProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </AtmNavigationProvider>
     </ThemeProvider>

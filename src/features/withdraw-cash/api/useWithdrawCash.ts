@@ -20,18 +20,13 @@ const withdrawCash = async (data: InputData) => {
 };
 
 type UseWithdrawCashConfigs = {
-    onSuccess?: ((data: {
-        remainingBalance: number;
-        banknotes: DispensableBanknote[];
-    }, variables: InputData, context: unknown) => unknown) | undefined
+    onSuccess?: (data: { remainingBalance: number; banknotes: DispensableBanknote[]; }, variables: InputData, context: unknown) => void
+    onError?: (error: unknown, variables: InputData, context: unknown) => void
 }
 
-/**
- * @todo expose onError configs 
- */
 export const useWithdrawCash = (configs = {} as UseWithdrawCashConfigs) => {
     const queryClient = useQueryClient();
-    const { onSuccess = noop } = configs
+    const { onSuccess = noop, onError = noop } = configs
     const withdrawCashMutation = useMutation(withdrawCash, {
         onSuccess: (data, variables, context) => {
             const { pin } = variables;
@@ -44,7 +39,8 @@ export const useWithdrawCash = (configs = {} as UseWithdrawCashConfigs) => {
                 }
             });
             onSuccess(data, variables, context)
-        }
+        },
+        onError: onError
     })
 
     return separateMutationAndResult(withdrawCashMutation);

@@ -6,9 +6,9 @@ export interface AtmConfigs {
   overdraft: number;
 }
 
-export interface AtmBankNotes {
-  [nominal: number]: number;
-}
+type Nominal = number
+type Count = number
+export type AtmBankNotes = Record<Nominal, Count>
 
 type AtmMockData = {
   configs: AtmConfigs;
@@ -45,3 +45,6 @@ const defaultMockData: AtmMockData = {
   configs: { currency: 'EUR', overdraft: 100 },
   banknotes: { 5: 4, 10: 15, 20: 7 },
 };
+
+//20 + 150 + 140 
+//320

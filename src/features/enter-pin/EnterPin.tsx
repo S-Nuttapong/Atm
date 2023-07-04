@@ -57,7 +57,7 @@ export const EnterPin = () => {
                 color="content.warning"
                 fontSize="md"
               >
-                PIN is not found
+                Invalid PIN. Please check your PIN and try again.
               </Txt>
             )}
           </Stack>

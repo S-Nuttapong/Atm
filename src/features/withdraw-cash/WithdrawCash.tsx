@@ -1,5 +1,6 @@
 import { useAtmNavigation } from '@entities/atm'
 import { useUserInformation } from '@entities/user'
+import { useWithdrawCashError } from '@features/withdraw-cash'
 import { useWithdrawCash } from '@features/withdraw-cash/api/useWithdrawCash'
 import { Button, Flex, Spinner, Stack, Txt } from '@shared/design-system'
 import { getCurrencySymbol } from '@shared/libs/currency'
@@ -19,12 +20,16 @@ const PendingWithdrawalRequest = () => {
 
 export const WithdrawCash = () => {
   const { backToMainMenu, navigate } = useAtmNavigation()
+  const { trackError } = useWithdrawCashError()
   const [withdrawCash, result] = useWithdrawCash({
     onSuccess: () => navigate('WithdrawCashSuccess'),
+    onError: error => {
+      trackError(error)
+      navigate('WithdrawCashFailed')
+    },
   })
   const { balance, pin } = useUserInformation<User>()
   const [requestAmount, setRequestAmount] = useState<string>()
-
   if (result.isLoading) return <PendingWithdrawalRequest />
 
   return (

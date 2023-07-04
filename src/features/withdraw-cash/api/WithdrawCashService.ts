@@ -1,17 +1,21 @@
 import { AtmServices } from "@entities/atm";
 import { UserServices } from "@entities/user";
 import { getBanknotesToDispense } from "@features/withdraw-cash/api/getBanknotesToDispense";
-import { calculateRemainingBalance } from "@features/withdraw-cash/api/getRemainingBalance";
+import { Currency } from "@shared/libs/currency";
+import { isString } from "@shared/libs/fp";
 import { DispensableBanknote } from "@shared/types";
-import { isString } from "remeda";
 import { calculateRemainingBanknotes } from "./calculateRemainingBanknotes";
-import { toDispensableBanknotesList } from "./toDispensableBanknotesList";
 
 
 type Norminal = number
 type NoteCount = number
 export type AtmBankNotes = Record<Norminal, NoteCount>
 
+const toDispensableBanknotesList = (banknotes: AtmBankNotes, currency: Currency) => Object.keys(banknotes).map(Number).map(norminal => ({ value: norminal, count: banknotes[norminal], currency }));
+const calculateRemainingBalance = (balance: number, amount: number, overdraft: number) => {
+    const remainingBalance = balance - amount;
+    return { value: remainingBalance, isOverdraft: remainingBalance < 0 && Math.abs(remainingBalance) > overdraft };
+}
 
 /**
  * BE implementation
@@ -33,7 +37,7 @@ export class WithdrawalCashService {
         const { overdraft, currency } = await this.Atm.configs();
         const remainingBalance = calculateRemainingBalance(balance.value, amount, overdraft);
 
-        if (remainingBalance.isOverdraft) throw new Error("Your request has exceed our overdraft limit please contact our officer")
+        if (remainingBalance.isOverdraft) throw new Error("Your request has exceeded the overdraft limit. Please contact our customer support for further assistance.")
 
         const banknotes = await this.Atm.banknotes();
         const banknotesToDispense = getBanknotesToDispense(banknotes, amount);
@@ -43,7 +47,6 @@ export class WithdrawalCashService {
         const remainingBanknotes = calculateRemainingBanknotes(banknotes, banknotesToDispense)
         await this.Atm.updateBanknotes(remainingBanknotes);
         await this.user.updateUserBalance(remainingBalance.value);
-        console.debug({ initial: banknotes, taken: banknotesToDispense, remaining: await this.Atm.banknotes() })
         return { remainingBalance: remainingBalance.value, banknotes: toDispensableBanknotesList(banknotesToDispense, currency) };
     }
 }
