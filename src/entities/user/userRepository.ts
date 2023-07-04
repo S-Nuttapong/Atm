@@ -2,13 +2,13 @@ import { Cash, User } from "@shared/api";
 import { reactQueryConfigs } from "@shared/configs";
 import { QueryClient, client } from "@shared/react-query";
 
-export abstract class IUserServices {
+export abstract class IUserRepository {
     abstract getBalance(): Promise<Cash>;
     abstract getInformation(): Promise<User>;
     abstract updateUserBalance(remainingBalance: number): Promise<void>;
 }
 
-export class MockUserServices implements IUserServices {
+export class MockUserRepository implements IUserRepository {
     private cache: QueryClient;
     private pin: string
 

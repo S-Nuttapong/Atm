@@ -1,5 +1,5 @@
 import { useAtmNavigation } from '@entities/atm'
-import { useUserInformation } from '@entities/user'
+import { useUserInformation } from '@entities/user/userRepository'
 import { useWithdrawCashError } from '@features/withdraw-cash'
 import { getCurrencySymbol } from '@features/withdraw-cash/api/getCurrencySymbol'
 import { useWithdrawCashMutation } from '@features/withdraw-cash/useWithdrawCashMutation'

@@ -1,5 +1,5 @@
-import { MockAtmServices } from "@entities/atm/mockAtmServices";
-import { MockUserServices } from "@entities/user";
+import { MockAtmRepository } from "@entities/atm/AtmRepository";
+import { MockUserRepository } from "@entities/user/userRepository";
 import { WithdrawalCashService } from "@features/withdraw-cash/api/WithdrawCashService";
 import { DispensableBanknote, User } from "@shared/api";
 import { noop } from "@shared/libs/fp";
@@ -13,8 +13,8 @@ interface InputData {
 
 const withdrawCash = async (data: InputData) => {
     const { pin, amount } = data;
-    const userService = new MockUserServices(pin);
-    const mockAtmService = new MockAtmServices();
+    const userService = new MockUserRepository(pin);
+    const mockAtmService = new MockAtmRepository();
     const withdrawCashService = new WithdrawalCashService(mockAtmService, userService);
     return await withdrawCashService.withdraw(amount);
 };

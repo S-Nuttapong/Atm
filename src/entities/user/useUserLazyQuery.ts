@@ -1,5 +1,4 @@
-import { User } from '@shared/api';
-import { getUser } from '@shared/api/Api';
+import { User, getUser } from '@shared/api';
 import { reactQueryConfigs } from '@shared/configs';
 import { useLazyQuery, useQueryClient } from '@shared/react-query';
 

@@ -1,5 +1,5 @@
 
-export abstract class IAtmServices {
+export abstract class IAtmRepository {
   abstract banknotes(): Promise<AtmBankNotes>;
   abstract configs(): Promise<AtmConfigs>;
   abstract updateUserPreference(configs: AtmConfigs): Promise<void>;
@@ -20,7 +20,7 @@ type AtmMockData = {
   banknotes: AtmBankNotes;
 };
 
-export class MockAtmServices implements IAtmServices {
+export class MockAtmRepository implements IAtmRepository {
   mockData: AtmMockData;
 
   constructor(mockData = defaultMockData) {
@@ -50,6 +50,3 @@ const defaultMockData: AtmMockData = {
   configs: { currency: 'EUR', overdraft: 100 },
   banknotes: { 5: 4, 10: 15, 20: 7 },
 };
-
-//20 + 150 + 140 
-//320
