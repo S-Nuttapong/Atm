@@ -1,14 +1,7 @@
-import { StackProps } from '@chakra-ui/react'
+import { Link, StackProps } from '@chakra-ui/react'
 import { useAtmNavigation } from '@entities/transaction'
 import { useUserInformation } from '@entities/user'
-import {
-  Button,
-  Divider,
-  Flex,
-  Heading,
-  Link,
-  Stack,
-} from '@shared/design-system'
+import { Button, Divider, Flex, Heading, Stack } from '@shared/design-system'
 import { GithubIcon } from '@shared/design-system/icons'
 import { capitalize } from '@shared/libs/fp'
 import { ComponentWithChildren } from '@shared/types'

@@ -6,9 +6,6 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "paths": {
-      "@shared/libs/design-system/icon/*": [
-        "./src/shared/libs/design-system/icon/*"
-      ],
       "@shared/*": ["./src/shared/*"],
       "@shared/libs/*": ["./src/shared/libs/*"],
       "@entities/*": ["./src/entities/*"],
