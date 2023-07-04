@@ -23,8 +23,10 @@ This app is merely for the purpose of demonstration on how I go about architectu
 
 - User Authentication:
   - Users can log in to the ATM app by entering their PIN code.
-- View Balance:
-  - TODO
+
+# View Balance:
+
+- TODO
 - Withdraw Cash:
   - Users can initiate a cash withdrawal from their account.
   - They can enter the withdrawal amount and confirm the transaction.
