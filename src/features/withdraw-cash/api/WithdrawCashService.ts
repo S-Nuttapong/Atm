@@ -1,4 +1,5 @@
-import { AtmServices } from "@entities/atm";
+import { IAtmServices } from "@entities/atm";
+import { IUserServices } from "@entities/user";
 import { getBanknotesToDispense } from "@features/withdraw-cash/api/getBanknotesToDispense";
 import { Currency } from "@features/withdraw-cash/api/getCurrencySymbol";
 import { DispensableBanknote } from "@shared/api";
@@ -24,8 +25,8 @@ const calculateRemainingBalance = (balance: number, amount: number, overdraft: n
  */
 export class WithdrawalCashService {
     constructor(
-        private readonly Atm: AtmServices,
-        private readonly user: UserServices,
+        private readonly Atm: IAtmServices,
+        private readonly user: IUserServices,
     ) {
         this.Atm = Atm
         this.user = user
