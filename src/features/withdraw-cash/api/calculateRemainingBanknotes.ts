@@ -1,4 +1,4 @@
-import { AtmBankNotes } from "./WithdrawCashService";
+import { AtmBankNotes } from "@entities/atm";
 
 export const calculateRemainingBanknotes = (initial: AtmBankNotes, dispensed: AtmBankNotes) => {
     const denominations = Object.keys(dispensed).map(Number);

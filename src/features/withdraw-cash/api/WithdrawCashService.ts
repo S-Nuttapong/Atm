@@ -1,4 +1,4 @@
-import { IAtmRepository } from "@entities/atm";
+import { AtmBankNotes, IAtmRepository } from "@entities/atm";
 import { IUserRepository } from "@entities/user/userRepository";
 import { getBanknotesToDispense } from "@features/withdraw-cash/api/getBanknotesToDispense";
 import { Currency } from "@features/withdraw-cash/api/getCurrencySymbol";
@@ -6,10 +6,6 @@ import { DispensableBanknote } from "@shared/api";
 import { isString } from "@shared/libs/fp";
 import { calculateRemainingBanknotes } from "./calculateRemainingBanknotes";
 
-
-type Norminal = number
-type NoteCount = number
-export type AtmBankNotes = Record<Norminal, NoteCount>
 
 const toDispensableBanknotesList = (banknotes: AtmBankNotes, currency: Currency) => Object.keys(banknotes).map(Number).map(norminal => ({ value: norminal, count: banknotes[norminal], currency }));
 const calculateRemainingBalance = (balance: number, amount: number, overdraft: number) => {

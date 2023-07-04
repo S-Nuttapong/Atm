@@ -1,4 +1,4 @@
-import { PinVerificationResponse, User } from "@shared/api/model"
+import { PinVerificationResponse, User } from "@shared/api/models"
 
 import axios from "axios"
 

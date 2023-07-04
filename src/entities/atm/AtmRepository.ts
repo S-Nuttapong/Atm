@@ -1,3 +1,4 @@
+import { AtmBankNotes } from "@entities/atm";
 
 export abstract class IAtmRepository {
   abstract banknotes(): Promise<AtmBankNotes>;
@@ -10,10 +11,6 @@ export interface AtmConfigs {
   currency: 'EUR';
   overdraft: number;
 }
-
-type Nominal = number
-type Count = number
-export type AtmBankNotes = Record<Nominal, Count>
 
 type AtmMockData = {
   configs: AtmConfigs;

@@ -1,2 +1,3 @@
 export { getUser } from './Api';
-export type * from './model';
+export type * from './models';
+
