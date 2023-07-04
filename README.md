@@ -4,19 +4,19 @@
 
 ### Disclaimer
 
-This app is merely for the purpose of demonstration on how I go about architecturing the app for maintainability, choosing the technology is logical for the business, and share my approach on how I go about testing. There are a lot of assumption about the business requirement, there is no BE to say the least, this app does not persist the data, therefore everything you see will start over upon refreshing the page
+This app is merely for the purpose of demonstrating how I go about architecting the app for maintainability, choosing the technology that is logical for the business, and sharing my approach to how I go about testing. There is a lot of assumptions about the business requirement, there is no BE, to say the least, and this app does not persist the data, therefore everything you see will start over upon refreshing the page
 
 ### [Demo](https://atm-s-nuttapong.vercel.app/)
 
 ![Atm app screenshot](https://github.com/S-Nuttapong/Atm/blob/dev/docs/application-screenshot.png)
 
 ## TODO
-
+- consolidate the business requirements, particularly the banknotes dispensation, the lack of concrete example opens up too many possibilities with regards to how the ATM decide which bank notes to give users  
 - consolidate the business features, and the entities/domains object, and update the architecture according
 - add integration testing for edge cases: withdrawal amount, inserting amount beyond the number
-- solidify the pre-defined guideline, how to import each module, interface/type convention, file/folder convention (should adhere to feature slice guide line)
+- solidify the pre-defined guideline, how to import each module, interface/type convention, file/folder convention (should adhere to feature slice guideline)
 - code documentation, particularly the reason why certain parts were introduced: workaround due to library capability
-- mock api on playwright - this is probably matter more after we've set up the CI pipeline
+- mock API on playwright - this probably matters more after we've set up the CI pipeline
 - set up the protected brach, add contribution guideline
 
 ## Overview
