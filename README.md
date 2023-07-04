@@ -2,11 +2,11 @@
 
 > ⚡️ Powered by [Vite](https://vitejs.dev/) and [Feature Sliced methodology](https://github.com/feature-sliced/documentation)
 
-Disclaimer
+### Disclaimer
 
 This app is merely for the purpose of demonstration on how I go about architecturing the app for maintainability, choosing the technology is logical for the business, and share my approach on how I go about testing. There are a lot of assumption about the business requirement, there is no BE to say the least, this app does not persist the data, therefore everything you see will start over upon refreshing the page
 
-## [Demo](https://atm-s-nuttapong.vercel.app/)
+### [Demo](https://atm-s-nuttapong.vercel.app/)
 
 ## TODO
 
