@@ -14,6 +14,8 @@ TODO
 - add integration testing for edge cases: withdrawal amount, inserting amount beyond the number
 - solidify the pre-defined guideline, how to import each module, interface/type convention, file/folder convention (should adhere to feature slice guide line)
 - code documentation, particularly the reason why certain parts were introduced: workaround due to library capability
+- mock api on playwright - this is probably matter more after we've set up the CI pipeline
+- set up the protected brach, add contribution guideline
 
 ## Overview
 
