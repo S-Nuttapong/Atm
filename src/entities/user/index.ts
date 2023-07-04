@@ -1,5 +1,4 @@
-export { MockUserServices } from "./api/mockUserService";
-export { UserServices } from "./api/types";
-export { useUserInformation } from "./useUserInformation";
-export { userConfig } from "./userConfig";
+export { IUserServices, MockUserServices } from "./api";
+export { useUserLazyQuery } from "./useUserLazyQuery";
+export { useUserInformation } from "./useUserQuery";
 

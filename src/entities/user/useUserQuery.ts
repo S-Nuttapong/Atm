@@ -1,7 +1,7 @@
-
-import { userConfig } from "@entities/user/userConfig";
+import { User } from "@shared/api";
+import { reactQueryConfigs } from "@shared/configs";
 import { QueryCache, useQueryClient } from "@shared/react-query";
-import { User } from "@shared/types";
+
 
 export const useUserInformation = <TResult = User | undefined>(pin?: string) => {
     const queryCache = useQueryClient().getQueryCache()
@@ -10,13 +10,13 @@ export const useUserInformation = <TResult = User | undefined>(pin?: string) => 
 };
 
 function findUserByPin(queryCache: QueryCache, pin: string) {
-    return queryCache.find([userConfig.entry, pin])?.state?.data
+    return queryCache.find([reactQueryConfigs.cacheEntry.user, pin])?.state?.data
 }
 
 function getLastLoginUser(queryCache: QueryCache) {
     const cacheEntries = queryCache.getAll();
 
-    const userEntries = cacheEntries.filter((entry) => entry.queryKey[0] === userConfig.entry);
+    const userEntries = cacheEntries.filter((entry) => entry.queryKey[0] === reactQueryConfigs.cacheEntry.user);
 
     userEntries.sort((a, b) => {
         const lastUpdatedA = a.state.dataUpdateCount ?? 0;

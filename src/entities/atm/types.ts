@@ -1,8 +1,5 @@
-import { AtmBankNotes, AtmConfigs } from "./mockAtmServices";
+import { TransactionName } from "@shared/api";
 
-export abstract class AtmServices {
-    abstract banknotes(): Promise<AtmBankNotes>;
-    abstract configs(): Promise<AtmConfigs>;
-    abstract updateUserPreference(configs: AtmConfigs): Promise<void>;
-    abstract updateBanknotes(remainingBanknotes: AtmBankNotes): Promise<void>;
-}
+export type WithTransactionEvent<T extends string> = T | `${T}Success` | `${T}Failed` | `${T}Pending`
+
+export type AtmView = 'TransactionsMenu' | WithTransactionEvent<TransactionName>

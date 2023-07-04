@@ -1,5 +1,10 @@
-import { AtmServices } from "@entities/atm";
 
+export abstract class IAtmServices {
+  abstract banknotes(): Promise<AtmBankNotes>;
+  abstract configs(): Promise<AtmConfigs>;
+  abstract updateUserPreference(configs: AtmConfigs): Promise<void>;
+  abstract updateBanknotes(remainingBanknotes: AtmBankNotes): Promise<void>;
+}
 
 export interface AtmConfigs {
   currency: 'EUR';
@@ -15,7 +20,7 @@ type AtmMockData = {
   banknotes: AtmBankNotes;
 };
 
-export class MockAtmServices implements AtmServices {
+export class MockAtmServices implements IAtmServices {
   mockData: AtmMockData;
 
   constructor(mockData = defaultMockData) {

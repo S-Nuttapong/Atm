@@ -1,4 +1,5 @@
-import { AtmView, TransactionName, WithTransactionEvent } from "@shared/types";
+import { AtmView, WithTransactionEvent } from "@entities/atm";
+import { TransactionName } from "@shared/api";
 
 const allTransactions: TransactionName[] = [
     'EnterPin',

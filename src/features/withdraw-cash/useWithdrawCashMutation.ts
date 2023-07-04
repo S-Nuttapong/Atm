@@ -1,10 +1,10 @@
 import { MockAtmServices } from "@entities/atm/mockAtmServices";
 import { MockUserServices } from "@entities/user";
 import { WithdrawalCashService } from "@features/withdraw-cash/api/WithdrawCashService";
+import { DispensableBanknote, User } from "@shared/api";
+import { noop } from "@shared/libs/fp";
 import { useMutation, useQueryClient } from "@shared/react-query";
-import { DispensableBanknote, User } from "@shared/types";
-import { UseBaseMutationResult } from "@tanstack/react-query";
-import { noop } from "remeda";
+
 
 interface InputData {
     pin: string;
@@ -24,10 +24,12 @@ type UseWithdrawCashConfigs = {
     onError?: (error: unknown, variables: InputData, context: unknown) => void
 }
 
-export const useWithdrawCash = (configs = {} as UseWithdrawCashConfigs) => {
+export const useWithdrawCashMutation = (configs = {} as UseWithdrawCashConfigs) => {
     const queryClient = useQueryClient();
     const { onSuccess = noop, onError = noop } = configs
-    const withdrawCashMutation = useMutation(withdrawCash, {
+    return useMutation({
+        mutationFn: withdrawCash,
+        mutationKey: ['withdrawCash'],
         onSuccess: (data, variables, context) => {
             const { pin } = variables;
             const user = queryClient.getQueryData(['user', pin]) as User
@@ -42,12 +44,7 @@ export const useWithdrawCash = (configs = {} as UseWithdrawCashConfigs) => {
         },
         onError: onError
     })
-
-    return separateMutationAndResult(withdrawCashMutation);
 }
 
-const separateMutationAndResult = <TData = unknown, TError = Error, TVariables = unknown, TContext = unknown>(mutationResult: UseBaseMutationResult<TData, TError, TVariables, TContext>) => {
-    const { mutate, ...rest } = mutationResult;
-    return [mutate, rest] as const;
-}
+
 

@@ -1,8 +1,14 @@
-import { UserServices } from "@entities/user/api/types";
+import { Cash, User } from "@shared/api";
+import { reactQueryConfigs } from "@shared/configs";
 import { QueryClient, client } from "@shared/react-query";
-import { Cash, User } from "@shared/types";
 
-export class MockUserServices implements UserServices {
+export abstract class IUserServices {
+    abstract getBalance(): Promise<Cash>;
+    abstract getInformation(): Promise<User>;
+    abstract updateUserBalance(remainingBalance: number): Promise<void>;
+}
+
+export class MockUserServices implements IUserServices {
     private cache: QueryClient;
     private pin: string
 
@@ -12,7 +18,7 @@ export class MockUserServices implements UserServices {
     }
 
     getBalance(): Promise<Cash> {
-        const user = this.cache.getQueryData<User>(['user', this.pin]);
+        const user = this.cache.getQueryData<User>([reactQueryConfigs.cacheEntry.user, this.pin]);
         if (user) {
             return Promise.resolve(user.balance);
         } else {
@@ -21,7 +27,7 @@ export class MockUserServices implements UserServices {
     }
 
     getInformation(): Promise<User> {
-        const user = this.cache.getQueryData<User>(['user', this.pin]);
+        const user = this.cache.getQueryData<User>([reactQueryConfigs.cacheEntry.user, this.pin]);
         if (user) {
             return Promise.resolve(user);
         } else {
@@ -30,7 +36,7 @@ export class MockUserServices implements UserServices {
     }
 
     updateUserBalance(remainingBalance: number): Promise<void> {
-        this.cache.setQueryData<User>(['user', this.pin], (prevData) => {
+        this.cache.setQueryData<User>([reactQueryConfigs.cacheEntry.user, this.pin], (prevData) => {
             if (prevData) {
                 return { ...prevData, balance: { ...prevData.balance, value: remainingBalance } };
             } else {

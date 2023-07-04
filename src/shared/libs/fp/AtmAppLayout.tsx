@@ -1,7 +1,15 @@
-import { Link, StackProps } from '@chakra-ui/react'
 import { useAtmNavigation } from '@entities/transaction'
 import { useUserInformation } from '@entities/user'
-import { Button, Divider, Flex, Heading, Stack } from '@shared/design-system'
+import { useWithdrawCashMutation } from '@features/withdraw-cash'
+import {
+  Button,
+  Divider,
+  Flex,
+  Heading,
+  Link,
+  Stack,
+  StackProps,
+} from '@shared/design-system'
 import { GithubIcon } from '@shared/design-system/icons'
 import { capitalize } from '@shared/libs/string'
 
@@ -43,7 +51,7 @@ export const AtmAppLayout: ComponentWithChildren<AtmAppLayoutProps> = props => {
   } = props
   const user = useUserInformation()
   const { exit } = useAtmNavigation()
-  const username = user?.firstName
+  const username = useWithdrawCashMutation(user?.firstName || '')
   return (
     <Flex
       position="relative"

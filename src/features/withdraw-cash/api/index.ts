@@ -1,1 +1,1 @@
-export { useWithdrawCash } from './useWithdrawCash';
+export { useWithdrawCashMutation } from '../useWithdrawCashMutation';

@@ -1,5 +1,5 @@
 import { useAtmNavigation } from '@entities/transaction'
-import { useEnterPin } from '@features/enter-pin/useEnterPin'
+import { useUserLazyQuery } from '@entities/user/useUserLazyQuery'
 
 import {
   Button,
@@ -20,7 +20,7 @@ const pinIsInvalid = (pin: string) => pin.length === passwordLength
 export const EnterPin = () => {
   const [pin, setPin] = useState('')
   const { backToMainMenu } = useAtmNavigation()
-  const [enterPin, result] = useEnterPin(pin, {
+  const [enterPin, result] = useUserLazyQuery(pin, {
     onSuccess: backToMainMenu,
   })
   return (
@@ -36,8 +36,8 @@ export const EnterPin = () => {
               onChange={pin => setPin(pin)}
               size="lg"
             >
-              {passWordDigits.map(() => (
-                <PinInputField color="primary.500" />
+              {passWordDigits.map((_, idx) => (
+                <PinInputField key={idx} color="primary.500" />
               ))}
             </PinInput>
           </HStack>

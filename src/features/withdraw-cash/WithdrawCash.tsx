@@ -1,10 +1,10 @@
 import { useAtmNavigation } from '@entities/atm'
 import { useUserInformation } from '@entities/user'
 import { useWithdrawCashError } from '@features/withdraw-cash'
-import { useWithdrawCash } from '@features/withdraw-cash/api/useWithdrawCash'
+import { getCurrencySymbol } from '@features/withdraw-cash/api/getCurrencySymbol'
+import { useWithdrawCashMutation } from '@features/withdraw-cash/useWithdrawCashMutation'
+import { User } from '@shared/api'
 import { Button, Flex, Spinner, Stack, Txt } from '@shared/design-system'
-import { getCurrencySymbol } from '@shared/libs/currency'
-import { User } from '@shared/types'
 import { useState } from 'react'
 import CurrencyInput from 'react-currency-input-field'
 import './CurrenyInput.css'
@@ -21,7 +21,7 @@ const PendingWithdrawalRequest = () => {
 export const WithdrawCash = () => {
   const { backToMainMenu, navigate } = useAtmNavigation()
   const { trackError } = useWithdrawCashError()
-  const [withdrawCash, result] = useWithdrawCash({
+  const [withdrawCash, result] = useWithdrawCashMutation({
     onSuccess: () => navigate('WithdrawCashSuccess'),
     onError: error => {
       trackError(error)

@@ -1,9 +1,8 @@
 import { AtmServices } from "@entities/atm";
-import { UserServices } from "@entities/user";
 import { getBanknotesToDispense } from "@features/withdraw-cash/api/getBanknotesToDispense";
-import { Currency } from "@shared/libs/currency";
+import { Currency } from "@features/withdraw-cash/api/getCurrencySymbol";
+import { DispensableBanknote } from "@shared/api";
 import { isString } from "@shared/libs/fp";
-import { DispensableBanknote } from "@shared/types";
 import { calculateRemainingBanknotes } from "./calculateRemainingBanknotes";
 
 
