@@ -8,7 +8,7 @@ This app is merely for the purpose of demonstration on how I go about architectu
 
 ## [Demo](https://atm-s-nuttapong.vercel.app/)
 
-TODO
+## TODO
 
 - consolidate the business features, and the entities/domains object, and update the architecture according
 - add integration testing for edge cases: withdrawal amount, inserting amount beyond the number
