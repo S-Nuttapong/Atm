@@ -11,11 +11,11 @@ This app is merely for the purpose of demonstrating how I go about architecting 
 ![Atm app screenshot](https://github.com/S-Nuttapong/Atm/blob/dev/docs/application-screenshot.png)
 
 ## TODO
+- code documentation, particularly the reason why certain parts were introduced: workaround due to library capability
 - consolidate the business requirements, particularly the banknotes dispensation, the lack of concrete example opens up too many possibilities with regards to how the ATM decide which bank notes to give users  
 - consolidate the business features, and the entities/domains object, and update the architecture according
 - add integration testing for edge cases: withdrawal amount, inserting amount beyond the number
 - solidify the pre-defined guideline, how to import each module, interface/type convention, file/folder convention (should adhere to feature slice guideline)
-- code documentation, particularly the reason why certain parts were introduced: workaround due to library capability
 - mock API on playwright - this probably matters more after we've set up the CI pipeline
 - set up the protected brach, add contribution guideline
 
