@@ -4,7 +4,7 @@
 
 ### Disclaimer
 
-This app is merely for the purpose of demonstrating how I go about architecting the app for maintainability, choosing the technology that is logical for the business, and sharing my approach to how I go about testing. There are a lot of assumptions about the business requirements, there is no BE, to say the least, and this app does not persist the data, therefore everything you see will start over upon refreshing the page
+This app is merely for the purpose of demonstrating how I go about architecting the app for maintainability, choosing the technology that is logical for the business, and sharing my approach to how I go about testing. There are a lot of assumptions about the business requirements influencing the design decision: ATM does not have a route, if we can reload the ATM at all, it should also bring users to the login screen. There is also no BE, therefore everything you see will start over upon refreshing the page.
 
 ### [Demo](https://atm-s-nuttapong.vercel.app/)
 
@@ -23,10 +23,6 @@ This app is merely for the purpose of demonstrating how I go about architecting 
 
 - User Authentication:
   - Users can log in to the ATM app by entering their PIN code.
-
-# View Balance:
-
-- TODO
 - Withdraw Cash:
   - Users can initiate a cash withdrawal from their account.
   - They can enter the withdrawal amount and confirm the transaction.
