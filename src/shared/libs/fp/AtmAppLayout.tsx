@@ -1,5 +1,5 @@
 import { useAtmNavigation } from '@entities/transaction'
-import { useUserInformation } from '@entities/user/userRepository'
+import { useUserInformation } from '@entities/user/UserRepository'
 import { useWithdrawCashMutation } from '@features/withdraw-cash'
 import {
   Button,

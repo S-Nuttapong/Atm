@@ -1,14 +1,29 @@
+import { AtmBankNotes } from "@entities/atm";
+import { Currency } from "@shared/api";
 import { first, last, pipe } from "@shared/libs/fp";
 
-export function getBanknotesToDispense(atmBanknotes: Record<number, number>, requestAmount: number) {
+export const dispenseCash = (atmBanknotes: Record<number, number>, requestAmount: number, currency: Currency) => {
     const totalDispensableAmount = getTotalDispensableAmount(atmBanknotes)
 
-    if (requestAmount > totalDispensableAmount) return `Insufficient Funds: The ATM does not have sufficient funds available. The maximum withdrawal limit is set at ${totalDispensableAmount}`
+    if (requestAmount > totalDispensableAmount) throw new Error(`Insufficient Funds: The ATM does not have sufficient funds available. The maximum withdrawal limit is set at ${totalDispensableAmount}`)
 
-    return searchNotes(atmBanknotes, requestAmount);
+    const banknotes = getBankNotesToDispense(atmBanknotes, requestAmount)
+    const remainingBanknotes = getRemainingBanknotes(atmBanknotes, banknotes)
+    return { banknotesToDispense: toDispensableBanknotesList(banknotes, currency), remainingBanknotes }
 }
 
-function searchNotes(_atmBanknotes: Record<number, number>, requestAmount: number) {
+const toDispensableBanknotesList = (banknotes: AtmBankNotes, currency: Currency) => Object.keys(banknotes).map(Number).map(norminal => ({ value: norminal, count: banknotes[norminal], currency }));
+
+
+const getRemainingBanknotes = (initial: AtmBankNotes, dispensed: AtmBankNotes) => {
+    const denominations = Object.keys(dispensed).map(Number);
+    return denominations.reduce((remaining, denomination) => {
+        remaining[denomination] -= dispensed[denomination];
+        return remaining;
+    }, { ...initial });
+};
+
+const getBankNotesToDispense = (_atmBanknotes: Record<number, number>, requestAmount: number) => {
     const atmBanknotes = { ..._atmBanknotes }
     const banknotesList = getBanknotesListSortedByLargestFirst(atmBanknotes)
     const minimumNominalAvailable = pipe(banknotesList, last, first)
@@ -31,9 +46,9 @@ function searchNotes(_atmBanknotes: Record<number, number>, requestAmount: numbe
         return { remainingRequestAmount: requestAmount, banknotesToDispense };
     }
 
-    const searchSmallestBanknotesCombination = (requestAmount: number, banknotesList: number[][]): Record<number, number> | string => {
+    const searchSmallestBanknotesCombination = (requestAmount: number, banknotesList: number[][]): Record<number, number> => {
         if (banknotesList.length === 0) {
-            return `Failed to issue this amount, minimum nominal: ${minimumNominalAvailable}, maximum amount: ${totalDispensableAmount}`
+            throw new Error(`Failed to issue this amount, minimum nominal: ${minimumNominalAvailable}, maximum amount: ${totalDispensableAmount}`)
         }
 
         const { remainingRequestAmount, banknotesToDispense } = getBanknotesCombination(requestAmount, banknotesList)

@@ -13,9 +13,9 @@ interface InputData {
 
 const withdrawCash = async (data: InputData) => {
     const { pin, amount } = data;
-    const userService = new MockUserRepository(pin);
-    const mockAtmService = new MockAtmRepository();
-    const withdrawCashService = new WithdrawalCashService(mockAtmService, userService);
+    const user = new MockUserRepository(pin);
+    const atm = new MockAtmRepository();
+    const withdrawCashService = new WithdrawalCashService(atm, user);
     return await withdrawCashService.withdraw(amount);
 };
 
@@ -24,6 +24,9 @@ type UseWithdrawCashConfigs = {
     onError?: (error: unknown, variables: InputData, context: unknown) => void
 }
 
+/**
+ * @todo use the withdraw cash api directly from shared/api, we once have moved the service to BE
+ */
 export const useWithdrawCashMutation = (configs = {} as UseWithdrawCashConfigs) => {
     const queryClient = useQueryClient();
     const { onSuccess = noop, onError = noop } = configs

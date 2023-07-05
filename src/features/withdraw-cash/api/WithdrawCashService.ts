@@ -1,13 +1,8 @@
-import { AtmBankNotes, IAtmRepository } from "@entities/atm";
-import { IUserRepository } from "@entities/user/userRepository";
-import { getBanknotesToDispense } from "@features/withdraw-cash/api/getBanknotesToDispense";
-import { Currency } from "@features/withdraw-cash/api/getCurrencySymbol";
+import { IAtmRepository } from "@entities/atm";
+import { IUserRepository } from "@entities/user/UserRepository";
+import { dispenseCash } from "@features/withdraw-cash/api/dispenseCash";
 import { DispensableBanknote } from "@shared/api";
-import { isString } from "@shared/libs/fp";
-import { calculateRemainingBanknotes } from "./calculateRemainingBanknotes";
 
-
-const toDispensableBanknotesList = (banknotes: AtmBankNotes, currency: Currency) => Object.keys(banknotes).map(Number).map(norminal => ({ value: norminal, count: banknotes[norminal], currency }));
 const calculateRemainingBalance = (balance: number, amount: number, overdraft: number) => {
     const remainingBalance = balance - amount;
     return { value: remainingBalance, isOverdraft: remainingBalance < 0 && Math.abs(remainingBalance) > overdraft };
@@ -15,37 +10,29 @@ const calculateRemainingBalance = (balance: number, amount: number, overdraft: n
 
 /**
  * BE implementation
- * @todo as of now the repositories / the DTO are required, but once BE is available we can apply dependency injection, so consumers of this do not have to instantiate the repositories every time, hence better DX
+ * @todo as of now the atm and user repositories are required, but once BE is available we can apply dependency injection, so consumers of this do not have to instantiate the repositories every time, hence better DX
  * @todo stress tests this module, particularly withdraw amount, once the requirement has been consolidated
  * @todo delegate to BE
- * @todo check the business logic with stake holders again what it means to dispense the notes evenly? number of notes wise, note value (denomination * count) wise, or how?
- * @todo Repository should be invoke inside or outside
+ * @todo we can argue that 
  */
 export class WithdrawalCashService {
     constructor(
-        private readonly Atm: IAtmRepository,
+        private readonly atm: IAtmRepository,
         private readonly user: IUserRepository,
     ) {
-        this.Atm = Atm
+        this.atm = atm
         this.user = user
     }
 
     public async withdraw(amount: number): Promise<{ remainingBalance: number; banknotes: DispensableBanknote[] }> {
         const balance = await this.user.getBalance();
-        const { overdraft, currency } = await this.Atm.configs();
+        const { overdraft, currency } = await this.atm.configs();
         const remainingBalance = calculateRemainingBalance(balance.value, amount, overdraft);
-
-        if (remainingBalance.isOverdraft) throw new Error("Your request has exceeded the overdraft limit. Please contact our customer support for further assistance.")
-
-        const banknotes = await this.Atm.banknotes();
-        const banknotesToDispense = getBanknotesToDispense(banknotes, amount);
-
-        if (isString(banknotesToDispense)) throw new Error(banknotesToDispense)
-
-        const remainingBanknotes = calculateRemainingBanknotes(banknotes, banknotesToDispense)
-        await this.Atm.updateBanknotes(remainingBanknotes);
+        const banknotes = await this.atm.banknotes();
+        const result = dispenseCash(banknotes, amount, currency);
+        await this.atm.updateBanknotes(result.remainingBanknotes);
         await this.user.updateUserBalance(remainingBalance.value);
-        return { remainingBalance: remainingBalance.value, banknotes: toDispensableBanknotesList(banknotesToDispense, currency) };
+        return { remainingBalance: remainingBalance.value, banknotes: result.banknotesToDispense };
     }
 }
 
