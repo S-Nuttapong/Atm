@@ -19,6 +19,10 @@ export {
   Spinner,
   Stack,
   ThemeProvider,
+  /**
+   * @todo revert name to Text, once Chakra has fixed the Text Auto import issue
+   * @see: https://github.com/chakra-ui/chakra-ui/issues/2824
+   */
   Text as Txt,
 } from '@chakra-ui/react'
 
