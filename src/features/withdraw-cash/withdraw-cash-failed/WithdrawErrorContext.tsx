@@ -27,6 +27,9 @@ export const WithdrawCashErrorProvider: ComponentWithChildren = ({
 }
 
 /**
+ * due to limitation of react-query useMutation, we can not retain state of mutation on different components despite they are in the same context provider
+ * hence we work around that with manual mutation error tracking
+ * @todo bump up to v5 once stable, remove the workaround
  * @see https://github.com/TanStack/query/issues/2304
  */
 export const useWithdrawCashError = useContext
