@@ -1,6 +1,6 @@
 import { Link, StackProps } from '@chakra-ui/react'
 import { useAtmNavigation } from '@entities/transaction'
-import { useUserInformation } from '@entities/user'
+import { useUserQuery } from '@entities/user'
 
 import { Button, Divider, Flex, Heading, Stack } from '@shared/design-system'
 import { GithubIcon } from '@shared/design-system/icons'
@@ -42,7 +42,7 @@ export const AtmAppLayout: ComponentWithChildren<AtmAppLayoutProps> = props => {
     title,
     spacing = 28,
   } = props
-  const user = useUserInformation()
+  const user = useUserQuery()
   const { exit } = useAtmNavigation()
   const username = user?.firstName
   return (

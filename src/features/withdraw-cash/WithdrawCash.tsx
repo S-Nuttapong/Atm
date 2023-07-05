@@ -1,5 +1,5 @@
 import { useAtmNavigation } from '@entities/atm'
-import { useUserInformation } from '@entities/user'
+import { useUserQuery } from '@entities/user'
 import { useWithdrawCashError } from '@features/withdraw-cash'
 import { getCurrencySymbol } from '@features/withdraw-cash/api/getCurrencySymbol'
 import { useWithdrawCashMutation } from '@features/withdraw-cash/useWithdrawCashMutation'
@@ -28,7 +28,7 @@ export const WithdrawCash = () => {
       navigate('WithdrawCashFailed')
     },
   })
-  const { balance, pin } = useUserInformation<User>()
+  const { balance, pin } = useUserQuery<User>()
   const [requestAmount, setRequestAmount] = useState<string>()
   if (result.isLoading) return <PendingWithdrawalRequest />
 

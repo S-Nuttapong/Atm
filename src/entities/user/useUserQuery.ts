@@ -3,7 +3,7 @@ import { reactQueryConfigs } from "@shared/configs";
 import { QueryCache, useQueryClient } from "@shared/react-query";
 
 
-export const useUserInformation = <TResult = User | undefined>(pin?: string) => {
+export const useUserQuery = <TResult = User | undefined>(pin?: string) => {
     const queryCache = useQueryClient().getQueryCache()
     const user = pin ? findUserByPin(queryCache, pin) : getLastLoginUser(queryCache)
     return (user ?? {}) as TResult

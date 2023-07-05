@@ -1,7 +1,7 @@
 import { atmConfigs } from '@entities/atm'
+import { TransactionName } from '@shared/api'
 import { Button, Grid } from '@shared/design-system'
 import { isTruthy } from '@shared/libs/fp'
-import { TransactionName } from '@shared/types'
 import { useAtmNavigation } from '../atm/atm-navigation'
 
 const twoByTwoWrapOnMobile = ['1fr', '1fr 1fr']

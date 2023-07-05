@@ -1,6 +1,5 @@
-import { atmConfigs } from '@entities/atm'
+import { AtmView, atmConfigs } from '@entities/atm'
 import { TransactionUnderMaintenance } from '@entities/transaction'
-import { AtmView } from '@shared/types'
 import { ComponentType } from 'react'
 import { AtmAppLayoutProps } from './AtmAppLayout'
 

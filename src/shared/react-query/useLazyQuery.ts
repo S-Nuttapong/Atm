@@ -4,6 +4,12 @@ import {
     useQuery,
 } from '@tanstack/react-query';
 
+/**
+ * @note lazy query loading state produces difference result to normal query whose query function is being executed right away. 
+ * Please use "isLoading" state cautiously, and in conjunction with "isIdle" state. Otherwise you may run into one of these situations; when doing lazy query, we can run into infinite loading, if use "isLoading" solely to represent loading state here.
+ * For majority of use cases, consider isFetching as a loading state will produce more predicable result
+ * @see https://stackoverflow.com/questions/72501651/what-state-represents-the-loading-or-data-not-fetched-yet-state-when-using-enabl
+ */
 export function useLazyQuery<TQueryFnData,
     TError,
     TData = TQueryFnData,
@@ -11,5 +17,5 @@ export function useLazyQuery<TQueryFnData,
 >(
     arg: UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>) {
     const { refetch, ...rest } = useQuery({ enabled: false, retry: false, ...arg })
-    return [refetch, rest]
+    return [refetch, rest] as const
 }

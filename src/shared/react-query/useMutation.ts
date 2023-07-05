@@ -9,5 +9,5 @@ export function useMutation<
     arg: UseMutationOptions<TData, TError, TVariables, TContext>,
 ) {
     const { mutate, mutateAsync: _, ...rest } = useTanStackMutation<TData, TError, TVariables, TContext>(arg)
-    return [mutate, rest]
+    return [mutate, rest] as const
 }

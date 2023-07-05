@@ -1,5 +1,7 @@
+import { AtmView } from '@entities/atm'
 import { contextFactory } from '@shared/libs/context'
-import { AtmView, ComponentWithChildren } from '@shared/types'
+import { ComponentWithChildren } from '@shared/types'
+
 import { useState } from 'react'
 
 interface IAtmNavigationContext {

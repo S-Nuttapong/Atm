@@ -1,6 +1,5 @@
 import { useAtmNavigation } from '@entities/transaction'
-import { useUserInformation } from '@entities/user/UserRepository'
-import { useWithdrawCashMutation } from '@features/withdraw-cash'
+import { useUserQuery } from '@entities/user'
 import {
   Button,
   Divider,
@@ -49,9 +48,9 @@ export const AtmAppLayout: ComponentWithChildren<AtmAppLayoutProps> = props => {
     title,
     spacing = 28,
   } = props
-  const user = useUserInformation()
+  const user = useUserQuery()
   const { exit } = useAtmNavigation()
-  const username = useWithdrawCashMutation(user?.firstName || '')
+  const username = user?.firstName
   return (
     <Flex
       position="relative"
