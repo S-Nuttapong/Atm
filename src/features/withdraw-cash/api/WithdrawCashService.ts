@@ -3,28 +3,48 @@ import { IUserRepository } from "@entities/user/UserRepository";
 import { dispenseCash } from "@features/withdraw-cash/api/dispenseCash";
 import { DispensableBanknote } from "@shared/api";
 
-const calculateRemainingBalance = (balance: number, amount: number, overdraft: number) => {
+/**
+ * Calculates the remaining balance after deducting the withdrawal amount from the current balance.
+ * @param balance - The current balance.
+ * @param amount - The withdrawal amount.
+ * @param overdraft - The overdraft limit.
+ * @returns The remaining balance after deducting the withdrawal amount.
+ * @throws {Error} If the remaining balance is less than 0 and exceeds the overdraft limit.
+ */
+const calculateRemainingBalance = (balance: number, amount: number, overdraft: number): number => {
     const remainingBalance = balance - amount;
-    if (remainingBalance < 0 && Math.abs(remainingBalance) > overdraft) throw new Error("Your request has exceeded the overdraft limit. Please contact our customer support for further assistance.")
+    if (remainingBalance < 0 && Math.abs(remainingBalance) > overdraft) {
+        throw new Error(
+            "Your request has exceeded the overdraft limit. Please contact our customer support for further assistance."
+        );
+    }
     return remainingBalance;
 }
 
 /**
- * BE implementation
- * @todo as of now the atm and user repositories are required, but once BE is available we can apply dependency injection, so consumers of this do not have to instantiate the repositories every time, hence better DX
- * @todo stress tests this module, particularly withdraw amount, once the requirement has been consolidated
- * @todo delegate to BE
- * @todo we can argue that 
+ * Withdrawal Cash Service implementation.
+ * Employs the "fail fast" practice by throwing an error if the remaining balance is insufficient.
  */
 export class WithdrawalCashService {
+    /**
+     * Creates an instance of WithdrawalCashService.
+     * @param atm - The ATM repository.
+     * @param user - The user repository.
+     */
     constructor(
         private readonly atm: IAtmRepository,
         private readonly user: IUserRepository,
     ) {
-        this.atm = atm
-        this.user = user
+        this.atm = atm;
+        this.user = user;
     }
 
+    /**
+     * Withdraws the specified amount from the user's balance.
+     * @param amount - The withdrawal amount.
+     * @returns A Promise that resolves to an object containing the remaining balance and the banknotes to dispense.
+     * @throws {Error} If the remaining balance is insufficient or if there is an error during the withdrawal process.
+     */
     public async withdraw(amount: number): Promise<{ remainingBalance: number; banknotes: DispensableBanknote[] }> {
         const balance = await this.user.getBalance();
         const { overdraft, currency } = await this.atm.configs();
@@ -36,5 +56,3 @@ export class WithdrawalCashService {
         return { remainingBalance: remainingBalance, banknotes: result.banknotesToDispense };
     }
 }
-
-
