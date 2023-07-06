@@ -5,7 +5,8 @@ import { DispensableBanknote } from "@shared/api";
 
 const calculateRemainingBalance = (balance: number, amount: number, overdraft: number) => {
     const remainingBalance = balance - amount;
-    return { value: remainingBalance, isOverdraft: remainingBalance < 0 && Math.abs(remainingBalance) > overdraft };
+    if (remainingBalance < 0 && Math.abs(remainingBalance) > overdraft) throw new Error("Your request has exceeded the overdraft limit. Please contact our customer support for further assistance.")
+    return remainingBalance;
 }
 
 /**
@@ -31,8 +32,8 @@ export class WithdrawalCashService {
         const banknotes = await this.atm.banknotes();
         const result = dispenseCash(banknotes, amount, currency);
         await this.atm.updateBanknotes(result.remainingBanknotes);
-        await this.user.updateUserBalance(remainingBalance.value);
-        return { remainingBalance: remainingBalance.value, banknotes: result.banknotesToDispense };
+        await this.user.updateUserBalance(remainingBalance);
+        return { remainingBalance: remainingBalance, banknotes: result.banknotesToDispense };
     }
 }
 
