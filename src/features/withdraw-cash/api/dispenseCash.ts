@@ -5,7 +5,7 @@ import { first, last, pipe } from "@shared/libs/fp";
 export const dispenseCash = (atmBanknotes: Record<number, number>, requestAmount: number, currency: Currency) => {
     const totalDispensableAmount = getTotalDispensableAmount(atmBanknotes)
 
-    if (requestAmount > totalDispensableAmount) throw new Error(`Insufficient Funds: The ATM does not have sufficient funds available. The maximum withdrawal limit is set at ${totalDispensableAmount}`)
+    if (requestAmount > totalDispensableAmount) throw new Error(`The ATM does not have sufficient funds available. Please contact our customer support for further assistance.`)
 
     const banknotes = getBankNotesToDispense(atmBanknotes, requestAmount)
     const remainingBanknotes = getRemainingBanknotes(atmBanknotes, banknotes)
