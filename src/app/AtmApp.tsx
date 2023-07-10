@@ -10,6 +10,11 @@ import { ViewBalance } from '../features/view-balance/ViewBalance'
 import { AtmAppLayout } from './AtmAppLayout'
 import { defineAtmTransactionMap } from './defineAtmTransactionMap'
 
+/**
+ * @todo as of now there is no need for lazily loading the each transaction view, since the bundle size is rather small (129kb)
+ * However, please note that we might need to consider lazily loading each transaction view, as features more transactions, and the bundle size gets large enough that it start to impact TTFB, and FCP
+ * @see https://web.dev/vitals/
+ */
 const atmTransactionMap = defineAtmTransactionMap({
   EnterPin: {
     Component: EnterPin,
