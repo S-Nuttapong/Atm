@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { enterPin, withdraw } from "../utils";
 
-test.describe('Cash Withdrawal', () => {
+test.describe('Post withdrawal balance inquiry', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto('/')
         await enterPin(page, '1111');
