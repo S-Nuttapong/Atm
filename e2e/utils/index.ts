@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 
 /**
- * @todo mock out real response instead of calling DB
+ * @todo set mock service worker with real response instead of calling actual API everytime
  */
 export const enterPin = async (page: Page, pin: string) => {
     await page.getByPlaceholder('○').first().click();

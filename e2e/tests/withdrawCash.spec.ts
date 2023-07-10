@@ -13,19 +13,19 @@ test.describe('Cash Withdrawal', () => {
     });
 
     //TODO: assert the cash dispensation: did users receive correct amount, and such, once the acceptance criteria has been discussed
-    test('displays transaction success to users when the amount is within the available balance', async ({ page }) => {
+    test('Displays transaction success to users when the amount is within the available balance', async ({ page }) => {
         await withdraw(page, 50);
         expect(page.getByRole('heading', { name: 'Transaction Success' })).toBeDefined()
     });
 
     //TODO: mock the atm's banknotes and user's balance, once our app has connected real BE
-    test('displays an insufficient funds message when the request amount is higher than what available in ATM', async ({ page }) => {
+    test('Displays an insufficient funds message when the request amount is higher than what available in ATM', async ({ page }) => {
         await withdraw(page, 320);
         expect(page.getByRole('heading', { name: 'Transaction Failed' })).toBeDefined()
         expect(page.getByText('The ATM does not have sufficient funds available. Please contact our customer support for further assistance.')).toBeDefined()
     });
 
-    test('displays a limit exceeded message when the amount exceeds the overdraft of up to £100', async ({ page }) => {
+    test('Displays a limit exceeded message when the amount exceeds the overdraft of up to £100', async ({ page }) => {
         await withdraw(page, 1200);
         expect(page.getByRole('heading', { name: 'Transaction Failed' })).toBeDefined()
         expect(page.getByText('Your request has exceeded the overdraft limit. Please contact our customer support for further assistance.')).toBeDefined()
