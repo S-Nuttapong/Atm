@@ -13,7 +13,7 @@ export default extendTheme({
             primary: primary[900],
         },
         border: {
-            primary: neutral[900]
+            primary: neutral[50]
         },
         content: {
             primary: neutral[50],

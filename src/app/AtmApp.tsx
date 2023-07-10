@@ -1,48 +1,14 @@
 import { TransactionsMenu, useAtmNavigation } from '@entities/transaction'
-import { useUserQuery } from '@entities/user'
 import { EnterPin } from '@features/enter-pin'
 import {
   WithdrawCash,
   WithdrawCashFail,
   WithdrawCashSuccess,
 } from '@features/withdraw-cash'
-import { Cash, User } from '@shared/api'
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Heading,
-  Stack,
-  Txt,
-} from '@shared/design-system'
+import { Box, Flex } from '@shared/design-system'
+import { ViewBalance } from '../features/view-balance/ViewBalance'
 import { AtmAppLayout } from './AtmAppLayout'
 import { defineAtmTransactionMap } from './defineAtmTransactionMap'
-
-const ViewBalance = () => {
-  const user = useUserQuery<User>()
-  const { backToMainMenu } = useAtmNavigation()
-  const formatBalance = (balance: Cash) =>
-    balance.value.toLocaleString('en-US', {
-      style: 'currency',
-      currency: balance.currency,
-      currencyDisplay: 'symbol',
-    })
-
-  return (
-    <Stack>
-      <Heading variant="h3">{JSON.stringify(user)}</Heading>
-      <Txt variant="body1" fontWeight="light">
-        {formatBalance(user.balance)}
-      </Txt>
-      <Center>
-        <Button variant="primary" w="full" maxW={48} onClick={backToMainMenu}>
-          Back
-        </Button>
-      </Center>
-    </Stack>
-  )
-}
 
 const atmTransactionMap = defineAtmTransactionMap({
   EnterPin: {
@@ -54,7 +20,6 @@ const atmTransactionMap = defineAtmTransactionMap({
   ViewBalance: {
     Component: ViewBalance,
     title: 'Your balance',
-    spacing: 20,
   },
   WithdrawCashFailed: {
     Component: WithdrawCashFail,
