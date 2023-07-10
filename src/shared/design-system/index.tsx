@@ -1,3 +1,5 @@
+import { Text } from '@chakra-ui/react'
+
 export {
   Box,
   Button,
@@ -19,12 +21,14 @@ export {
   Spinner,
   Stack,
   ThemeProvider,
-  /**
-   * @todo revert name to Text, once Chakra has fixed the Text Auto import issue
-   * @see: https://github.com/chakra-ui/chakra-ui/issues/2824
-   */
-  Text as Txt,
 } from '@chakra-ui/react'
+
+/**
+ * chakra Text component with modified such that VScode picks up the component name, and can auto import
+ * @todo revert name to Text, once Chakra has fixed the Text Auto import issue
+ * @see https://github.com/chakra-ui/chakra-ui/issues/2824
+ */
+export const Txt = Text
 
 export type { StackProps } from '@chakra-ui/react'
 
