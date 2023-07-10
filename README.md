@@ -18,6 +18,7 @@ This app is merely for the purpose of demonstrating how I go about architecting 
 - [ ] Solidify the pre-defined guidelines, including how to import each module, interface/type conventions, and file/folder conventions (should adhere to feature slice guidelines).
 - [ ] Mock the API on Playwright. This probably matters more after we've set up the CI pipeline.
 - [ ] Set up the protected branch and add contribution guidelines.
+- [ ] Add logging service?.
 
 ## Overview
 
